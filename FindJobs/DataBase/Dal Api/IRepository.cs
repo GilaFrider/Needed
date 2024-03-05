@@ -6,18 +6,21 @@ using System.Threading.Tasks;
 
 namespace DataBase
 {
-    public interface ICrud<T>
+    public interface IRepository<T>
     {
-            
+        List<T> GetAll();
+        //List<T> GetByCriterions(T item);
+
         void Create(T item);
 
         void Delete(T item);
 
         void Upadte(T item);
-        void Get(T item);
+        
+        
 
 
-        List<T> Read();
+        //List<T> Read();
     }
 }
 
