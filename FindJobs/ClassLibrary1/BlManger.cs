@@ -1,13 +1,12 @@
-﻿using DataBase.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataBase.Dal_Api
+namespace Bl
 {
-    public interface IJob:IRepository<Job>
+    public class Blmanger
     {
     }
 }

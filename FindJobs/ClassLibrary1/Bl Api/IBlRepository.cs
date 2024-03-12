@@ -4,23 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataBase
+namespace Bl.Bl_Api
 {
-    public interface IRepository<T>
+    public interface IBlRepository<T>
     {
         List<T> GetAll();
-        //List<T> GetByCriterions(T item);
 
         T Create(T item);
 
         T Delete(T item);
 
         T Upadte(int ID, T item);
-        
-        
-
-
-        
     }
 }
-
