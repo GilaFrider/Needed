@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataBase.Dal_Api
 {
-    public interface IEmployer:IRepository<Employer>
+    public interface IEmployerRepo:IRepository<Employer>
     {
     }
 }

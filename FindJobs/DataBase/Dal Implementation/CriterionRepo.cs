@@ -2,6 +2,7 @@
 using DataBase.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,12 +11,27 @@ namespace DataBase.Dal_Implementation
 {
     public class CriterionRepo : ICriterionRepo
     {
-        public void Create(Criterion item)
+        Context context;
+        public CriterionRepo(Context context)
         {
-            throw new NotImplementedException();
+            this.context = context;
+        }
+        public Criterion Create(Criterion item)
+        {
+            try
+            {
+                context.Criteria.Add(item);
+                context.SaveChanges();
+                return item;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                throw new Exception("Failed to add a new Criterion");
+            }
         }
 
-        public void Delete(Criterion item)
+        public Criterion Delete(Criterion item)
         {
             throw new NotImplementedException();
         }
@@ -25,7 +41,9 @@ namespace DataBase.Dal_Implementation
             throw new NotImplementedException();
         }
 
-        public void Upadte(Criterion item)
+
+
+        public Criterion Upadte(int ID, Criterion item)
         {
             throw new NotImplementedException();
         }

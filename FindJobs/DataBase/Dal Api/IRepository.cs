@@ -11,11 +11,11 @@ namespace DataBase
         List<T> GetAll();
         //List<T> GetByCriterions(T item);
 
-        void Create(T item);
+        T Create(T item);
 
-        void Delete(T item);
+        T Delete(T item);
 
-        void Upadte(T item);
+        T Upadte(int ID, T item);
         
         
 
