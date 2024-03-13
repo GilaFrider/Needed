@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Bl.Bl_Models;
+namespace Bl.DTO;
 
 public partial class BlCriterion
 {
@@ -17,5 +17,5 @@ public partial class BlCriterion
 
     public string? Descriptions { get; set; }
 
-    public virtual ICollection<Job> Jobs { get; set; } = new List<Job>();
+    public virtual ICollection<BlJob> Jobs { get; set; } = new List<BlJob>();
 }
