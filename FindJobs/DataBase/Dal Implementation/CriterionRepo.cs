@@ -33,12 +33,30 @@ namespace DataBase.Dal_Implementation
 
         public Criterion Delete(Criterion item)
         {
-            throw new NotImplementedException();
+            try
+            {
+                context.Criteria.Remove(item);
+                context.SaveChanges();
+                return item;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                throw new Exception("Failed to remove an Criterion");
+            }
         }
 
         public List<Criterion> GetAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return context.Criteria.ToList();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                throw new Exception("Failed to display all  Criterion");
+            }
         }
 
 

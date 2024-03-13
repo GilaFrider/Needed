@@ -1,4 +1,7 @@
 ﻿using Bl.Bl_Api;
+using DataBase;
+using DataBase.Dal_Api;
+using DataBase.Dal_Implementation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +13,18 @@ namespace Bl.Bl_Implementation
 {
     public class BlFieldOfWork:IBlFieldOfWork
     {
-        public List<> GetAll()
+        IFieldOfWorkRepo fieldOfWorkRepo;
+        public BlFieldOfWork(DalManager dalManager)
         {
-            List<Address> addressToClients = addressRepo.GetAll();
-            List<AddressToClient> ans = new List<AddressToClient>();
-            for (int i = 0; i < addressToClients.Count; i++)
-            {
-                ans.Add(new AddressToClient() { City = addressToClients[i].City, Nighbord = addressToClients[i].Street });
-            }
-            return ans;
+            this.fieldOfWorkRepo = dalManager.fieldOfWork;
+        }
+        public List<BlFieldOfWork> GetAll()
+        {
+            //List<FieldOfWorkRepo> fieldOfWorkRepos = fieldOfWorkRepo.
+
+            //return ans;
+            return null;
+            
         }
 
     }
