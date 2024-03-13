@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bl.Bl_Api
 {
-    internal interface IBlEmployer
+    public interface IBlEmployer:IBlRepository<IBlEmployer>
     {
     }
 }

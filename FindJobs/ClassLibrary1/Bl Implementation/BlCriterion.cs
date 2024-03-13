@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bl.Bl_Implementation
 {
-    internal class BlCriterion
+    public class BlCriterion
     {
     }
 }
