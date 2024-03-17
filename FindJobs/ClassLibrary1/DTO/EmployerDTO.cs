@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Bl.Bl_Models;
-public partial class DTOEmployer
+namespace DataBase.Models;
+
+public partial class Employer
 {
     public int Code { get; set; }
 

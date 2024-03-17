@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Bl.DTO;
+namespace DataBase.Models;
 
-public partial class DTOCriterion
+public partial class CriterionDTO
 {
     public int Code { get; set; }
 
@@ -17,5 +17,5 @@ public partial class DTOCriterion
 
     public string? Descriptions { get; set; }
 
-    public virtual ICollection<DTOjob> Jobs { get; set; } = new List<DTOJob>();
+    public virtual ICollection<JobDTO> Jobs { get; set; } = new List<JobDTO>();
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bl.Bl_Api
 {
-    public interface IBlCriterion:IBlRepository<Criterion>
+    public interface IBlCriterion:IBlRepository<CriterionDTO>
     {
     }
 }
