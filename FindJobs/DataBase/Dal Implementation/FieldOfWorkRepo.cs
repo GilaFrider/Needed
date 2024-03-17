@@ -29,5 +29,19 @@ namespace DataBase.Dal_Implementation
                 throw new Exception("Failed to display all Field Of Work");
             }
         }
+        public FieldOfWork Create(FieldOfWork item)
+        {
+            try
+            {
+                context.FieldOfWorks.Add(item);
+                context.SaveChanges();
+                return item;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                throw new Exception("Failed to add a new Field Of Work");
+            }
+        }
     }
 }

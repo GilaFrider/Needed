@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Bl.DTO;
 
-public partial class BlCriterion
+public partial class DTOCriterion
 {
     public int Code { get; set; }
 
@@ -17,5 +17,5 @@ public partial class BlCriterion
 
     public string? Descriptions { get; set; }
 
-    public virtual ICollection<BlJob> Jobs { get; set; } = new List<BlJob>();
+    public virtual ICollection<DTOjob> Jobs { get; set; } = new List<DTOJob>();
 }

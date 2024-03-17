@@ -63,7 +63,26 @@ namespace DataBase.Dal_Implementation
 
         public Criterion Upadte(int ID, Criterion item)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Criterion c = context.Criteria.FirstOrDefault(x => x.Code == ID);
+                if (c != null)
+                {
+                    c.SeveralYearsOfExperience = item.SeveralYearsOfExperience;
+                    c.Car = item.Car;
+                    c.NumberOfCvsSent = item.NumberOfCvsSent;
+                    c.Salary = item.Salary;
+                    c.Descriptions = item.Descriptions;
+                }
+
+                context.SaveChanges();
+                return c;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                throw new Exception("Failed to update Criterion");
+            }
         }
     }
 }

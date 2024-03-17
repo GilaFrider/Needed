@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 namespace Bl.Bl_Models;
-public partial class BlEmployer
+public partial class DTOEmployer
 {
     public int Code { get; set; }
 

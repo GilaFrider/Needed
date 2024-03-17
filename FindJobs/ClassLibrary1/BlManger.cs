@@ -8,5 +8,6 @@ namespace Bl
 {
     public class Blmanger
     {
+
     }
 }
