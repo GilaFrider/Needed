@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DataBase.Models;
 
-public partial class Employer
+public partial class EmployerDTO
 {
     public int Code { get; set; }
 
@@ -19,5 +19,5 @@ public partial class Employer
 
     public string CompanyAddress { get; set; } = null!;
 
-    public virtual ICollection<Job> Jobs { get; set; } = new List<Job>();
+    public virtual ICollection<JobDTO> Jobs { get; set; } = new List<JobDTO>();
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DataBase.Models;
 
-public partial class Job
+public partial class JobDTO
 {
     public int Code { get; set; }
 
