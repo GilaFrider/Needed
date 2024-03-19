@@ -4,8 +4,10 @@ using DataBase.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllers();
 DBActions actions = new DBActions(builder.Configuration);
 var connString = actions.GetConnectionString("AcademyDB");
+
 builder.Services.AddDbContext<Context>(opt => opt.UseSqlServer(connString));
 //builder.Services.AddScoped<IUniversityRepo, UniversityRepo>();
 

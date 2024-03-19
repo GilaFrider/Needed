@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataBase.Models;
+namespace Bl.DTO;
 
 public partial class CriterionDTO
 {

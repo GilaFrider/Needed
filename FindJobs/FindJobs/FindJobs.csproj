@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\Bl.csproj" />
+    <ProjectReference Include="..\Bl\Bl.csproj" />
   </ItemGroup>
 
 </Project>

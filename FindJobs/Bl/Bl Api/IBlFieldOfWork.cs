@@ -1,4 +1,5 @@
-﻿using DataBase.Models;
+﻿using Bl.Bl_Implementation;
+using Bl.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace Bl.Bl_Api
 {
-    public interface IBlCriterion:IBlRepository<CriterionDTO>
+    public interface IBlFieldOfWork
     {
+        List<FieldOfWorkDTO> GetAll();
     }
 }

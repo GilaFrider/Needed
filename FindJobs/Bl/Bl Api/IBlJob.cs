@@ -1,4 +1,5 @@
-﻿using Bl.Bl_Models;
+﻿
+using Bl.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Bl.Bl_Api
 {
-    public interface IBlJob:IBlRepository<Job>
+    public interface IBlJob:IBlRepository<JobDTO>
     {
     }
 }
