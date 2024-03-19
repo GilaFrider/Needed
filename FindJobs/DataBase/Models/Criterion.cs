@@ -19,8 +19,5 @@ public partial class Criterion
 
     public virtual ICollection<Job> Jobs { get; set; } = new List<Job>();
 
-    public static object Select(Func<object, global::Bl.DTO.FieldOfWorkDTO> value)
-    {
-        throw new NotImplementedException();
-    }
+  
 }

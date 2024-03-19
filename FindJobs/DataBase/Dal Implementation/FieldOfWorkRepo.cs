@@ -1,11 +1,6 @@
 ﻿using DataBase.Dal_Api;
 using DataBase.Models;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataBase.Dal_Implementation
 {
@@ -17,7 +12,7 @@ namespace DataBase.Dal_Implementation
             this.context = context;
         }
 
-        List<FieldOfWork> IFieldOfWorkRepo.GetAll()
+        public List<FieldOfWork> GetAll()
         {
             try
             {
