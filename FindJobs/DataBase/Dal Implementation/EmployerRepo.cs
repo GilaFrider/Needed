@@ -31,14 +31,15 @@ namespace DataBase.Dal_Implementation
             }
         }
 
-        public Employer Delete(Employer item)
+        public Employer Delete(int code)
         {
 
             try
             {
-                context.Employers.Remove(item);
+                Employer e = context.Employers.FirstOrDefault(x => x.Code == code);
+                context.Employers.Remove(e);
                 context.SaveChanges();
-                return item;
+                return e;
             }
             catch (Exception ex)
             {
@@ -61,11 +62,11 @@ namespace DataBase.Dal_Implementation
         }
 
     
-        public Employer Upadte(int ID, Employer employer)
+        public Employer Upadte(int code, Employer employer)
         {
             try
             {
-                Employer e = context.Employers.FirstOrDefault(x => x.Code == ID);
+                Employer e = context.Employers.FirstOrDefault(x => x.Code == code);
                 if (e != null)
                 {
                     e.Email = employer.Email;   

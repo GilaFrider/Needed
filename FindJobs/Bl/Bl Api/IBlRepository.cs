@@ -12,7 +12,7 @@ namespace Bl.Bl_Api
 
         T Create(T item);
 
-        T Delete(T item);
+        T Delete(int code);
 
         T Upadte(int ID, T item);
     }

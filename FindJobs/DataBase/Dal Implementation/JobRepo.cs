@@ -15,7 +15,7 @@ namespace DataBase.Dal_Implementation
             throw new NotImplementedException();
         }
 
-        public Job Delete(Job item)
+        public Job Delete(int code)
         {
             throw new NotImplementedException();
         }
@@ -25,7 +25,7 @@ namespace DataBase.Dal_Implementation
             throw new NotImplementedException();
         }
 
-        public Job Upadte(int ID, Job item)
+        public Job Upadte(int code, Job item)
         {
             throw new NotImplementedException();
         }

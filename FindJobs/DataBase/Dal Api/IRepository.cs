@@ -13,9 +13,9 @@ namespace DataBase
 
         T Create(T item);
 
-        T Delete(T item);
+        T Delete(int code);
 
-        T Upadte(int ID, T item);
+        T Upadte(int code, T item);
         
         
 

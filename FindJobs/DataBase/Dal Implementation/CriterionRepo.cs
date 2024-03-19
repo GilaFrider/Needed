@@ -31,13 +31,14 @@ namespace DataBase.Dal_Implementation
             }
         }
 
-        public Criterion Delete(Criterion item)
+        public Criterion Delete(int code)
         {
             try
             {
-                context.Criteria.Remove(item);
+                Criterion c = context.Criteria.FirstOrDefault(x => x.Code == code);
+                context.Criteria.Remove(c);
                 context.SaveChanges();
-                return item;
+                return c;
             }
             catch (Exception ex)
             {
@@ -61,11 +62,11 @@ namespace DataBase.Dal_Implementation
 
 
 
-        public Criterion Upadte(int ID, Criterion item)
+        public Criterion Upadte(int code, Criterion item)
         {
             try
             {
-                Criterion c = context.Criteria.FirstOrDefault(x => x.Code == ID);
+                Criterion c = context.Criteria.FirstOrDefault(x => x.Code == code);
                 if (c != null)
                 {
                     c.SeveralYearsOfExperience = item.SeveralYearsOfExperience;
