@@ -58,12 +58,26 @@ namespace Bl.Bl_Implementation
             return criterion;
         }
 
-        public CriterionDTO Delete(CriterionDTO item)
+        public CriterionDTO Delete(int code)
+        {
+            Criterion c = _CriterionRepo.Delete(code);
+            return new CriterionDTO()
+            {
+            Code = code,
+            SeveralYearsOfExperience = c.SeveralYearsOfExperience,
+            Car = c.Car
+            NumberOfCvsSent = criterion.NumberOfCvsSent;
+            Salary = criterion.Salary;
+            Descriptions = criterion.Descriptions;
+            };
+        }
+
+        public CriterionDTO Upadte(int ID, CriterionDTO item)
         {
             throw new NotImplementedException();
         }
 
-        public CriterionDTO Upadte(int ID, CriterionDTO item)
+        public CriterionDTO Delete(int code)
         {
             throw new NotImplementedException();
         }
