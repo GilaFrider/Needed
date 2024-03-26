@@ -9,13 +9,12 @@ namespace DataBase
     public interface IRepository<T>
     {
         List<T> GetAll();
-        //List<T> GetByCriterions(T item);
 
         T Create(T item);
 
         T Delete(int code);
 
-        T Upadte(int code, T item);
+        T Update(int code, T item);
         
         
 

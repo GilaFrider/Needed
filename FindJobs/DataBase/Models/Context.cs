@@ -6,10 +6,6 @@ namespace DataBase.Models;
 
 public partial class Context : DbContext
 {
-    public Context()
-    {
-    }
-
     public Context(DbContextOptions<Context> options)
         : base(options)
     {
@@ -23,15 +19,11 @@ public partial class Context : DbContext
 
     public virtual DbSet<Job> Jobs { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=H:\\DB\\Data.mdf;Integrated Security=True;Connect Timeout=30");
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Criterion>(entity =>
         {
-            entity.HasKey(e => e.Code).HasName("PK__criteria__357D4CF8D4AE569C");
+            entity.HasKey(e => e.Code).HasName("PK__criteria__357D4CF8D1455BEB");
 
             entity.ToTable("criteria");
 
@@ -45,7 +37,7 @@ public partial class Context : DbContext
 
         modelBuilder.Entity<Employer>(entity =>
         {
-            entity.HasKey(e => e.Code).HasName("PK__Employer__357D4CF86661B612");
+            entity.HasKey(e => e.Code).HasName("PK__Employer__357D4CF8256FB26C");
 
             entity.Property(e => e.Code).HasColumnName("code");
             entity.Property(e => e.CompanyAddress)
@@ -74,7 +66,7 @@ public partial class Context : DbContext
 
         modelBuilder.Entity<FieldOfWork>(entity =>
         {
-            entity.HasKey(e => e.Code).HasName("PK__fieldOfW__357D4CF8018C4388");
+            entity.HasKey(e => e.Code).HasName("PK__fieldOfW__357D4CF80DE2AE7E");
 
             entity.ToTable("fieldOfWork");
 
@@ -87,7 +79,7 @@ public partial class Context : DbContext
 
         modelBuilder.Entity<Job>(entity =>
         {
-            entity.HasKey(e => e.Code).HasName("PK__Jobs__357D4CF8AD19CB79");
+            entity.HasKey(e => e.Code).HasName("PK__Jobs__357D4CF8AEF5BA53");
 
             entity.Property(e => e.Code).HasColumnName("code");
             entity.Property(e => e.CriteriaCode).HasColumnName("criteriaCode");

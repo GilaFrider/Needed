@@ -63,30 +63,19 @@ namespace Bl.Bl_Implementation
             Criterion c = _CriterionRepo.Delete(code);
             return new CriterionDTO()
             {
-            Code = code,
-            SeveralYearsOfExperience = c.SeveralYearsOfExperience,
-            Car = c.Car
-            NumberOfCvsSent = criterion.NumberOfCvsSent;
-            Salary = criterion.Salary;
-            Descriptions = criterion.Descriptions;
+                Code = code,
+                SeveralYearsOfExperience = c.SeveralYearsOfExperience,
+                Car = c.Car,
+                NumberOfCvsSent = c.NumberOfCvsSent,
+                Salary = c.Salary,
+                Descriptions = c.Descriptions
             };
         }
-
-        public CriterionDTO Upadte(int ID, CriterionDTO item)
+        public CriterionDTO Update(int code, CriterionDTO item)
         {
             throw new NotImplementedException();
         }
-
-        public CriterionDTO Delete(int code)
-        {
-            throw new NotImplementedException();
-        }
-        //public CriterionDTO Delete(string name)
-        //{
         //    Crown c = crowns.Delete(name);
-        //    return new CrownDTO()
-        //    {
-        //        CrownCode = c.CrownCode,
         //        Name = name,
         //        Description = c.Description,
         //        Price = c.Price,
@@ -94,7 +83,6 @@ namespace Bl.Bl_Implementation
         //        Qtty = c.Qtty,
         //        Image = c.Image
         //    };
-    }
-
+    }  
 }
 

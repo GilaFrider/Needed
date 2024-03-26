@@ -62,7 +62,7 @@ namespace DataBase.Dal_Implementation
 
 
 
-        public Criterion Upadte(int code, Criterion item)
+        public Criterion Update(int code, Criterion item)
         {
             try
             {

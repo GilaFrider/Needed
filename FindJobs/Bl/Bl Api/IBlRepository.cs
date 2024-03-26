@@ -14,6 +14,6 @@ namespace Bl.Bl_Api
 
         T Delete(int code);
 
-        T Upadte(int ID, T item);
+        T Update(int code, T item);
     }
 }

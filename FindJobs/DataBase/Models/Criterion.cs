@@ -18,6 +18,4 @@ public partial class Criterion
     public string? Descriptions { get; set; }
 
     public virtual ICollection<Job> Jobs { get; set; } = new List<Job>();
-
-  
 }

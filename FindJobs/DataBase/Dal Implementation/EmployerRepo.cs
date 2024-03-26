@@ -62,7 +62,7 @@ namespace DataBase.Dal_Implementation
         }
 
     
-        public Employer Upadte(int code, Employer employer)
+        public Employer Update(int code, Employer employer)
         {
             try
             {
