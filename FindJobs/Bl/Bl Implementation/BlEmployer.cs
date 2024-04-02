@@ -73,9 +73,18 @@ namespace Bl.Bl_Implementation
                 CompanyAddress = employer.CompanyAddress
             };
         }
-        public EmployerDTO Update(int code, EmployerDTO item)
+        public EmployerDTO Update(int code, EmployerDTO employer)
         {
-            throw new NotImplementedException();
+            Employer e = new Employer();
+            e.Code = employer.Code;
+            e.Email = employer.Email;
+            e.Phone = employer.Phone;
+            e.Firstname = employer.Firstname;
+            e.Lastname = employer.Lastname;
+            e.CompanyName = employer.CompanyName;
+            e.CompanyAddress = employer.CompanyAddress;
+            _EmployerRepo.Create(e);
+            return employer;
         }
     }
 }
