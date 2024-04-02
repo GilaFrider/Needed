@@ -71,9 +71,17 @@ namespace Bl.Bl_Implementation
                 Descriptions = c.Descriptions
             };
         }
-        public CriterionDTO Update(int code, CriterionDTO item)
+        public CriterionDTO Update(int code, CriterionDTO criterion)
         {
-            throw new NotImplementedException();
+            Criterion c = new Criterion();
+            c.Code = criterion.Code;
+            c.SeveralYearsOfExperience = criterion.SeveralYearsOfExperience;
+            c.Car = criterion.Car;
+            c.NumberOfCvsSent = criterion.NumberOfCvsSent;
+            c.Salary = criterion.Salary;
+            c.Descriptions = criterion.Descriptions;
+            _CriterionRepo.Update(code, c);
+            return criterion;
         }
         //    Crown c = crowns.Delete(name);
         //        Name = name,
