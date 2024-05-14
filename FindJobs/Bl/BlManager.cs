@@ -8,6 +8,7 @@ namespace Bl
     public class BlManager
     {
         public IBlFieldOfWork fieldOfWorkServices { get; }
+        public IBlJob jobServices { get; }
         //.....
 
         public BlManager()
@@ -16,10 +17,12 @@ namespace Bl
             services.AddScoped<DalManager>();
 
             services.AddScoped<IBlFieldOfWork, BlFieldOfWork>();
+            services.AddScoped<IBlJob, BlJob>();
             //.....
             ServiceProvider servicesProvider = services.BuildServiceProvider();
 
-            fieldOfWorkServices = servicesProvider.GetService<IBlFieldOfWork>();
+            fieldOfWorkServices = (BlFieldOfWork) servicesProvider.GetService<IBlFieldOfWork>();
+            jobServices = (BlJob)servicesProvider.GetService<IBlJob>();
         }
     }
 }

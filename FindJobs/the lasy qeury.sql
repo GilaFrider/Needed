@@ -20,7 +20,6 @@ CREATE TABLE [dbo].[criteria] (
     [Descriptions]             VARCHAR (1000) NULL,
     PRIMARY KEY CLUSTERED ([code] ASC)
 );
-drop table jobs
 CREATE TABLE [dbo].[Jobs] (
     [code]            INT IDENTITY (1, 1) NOT NULL,
     [EmployersCode]   INT NOT NULL,

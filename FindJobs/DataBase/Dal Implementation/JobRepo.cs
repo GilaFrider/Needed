@@ -124,59 +124,59 @@ namespace DataBase.Dal_Implementation
         }
         //בעזרת שיטות אלה, כעת תוכל לאחזר רשימה של משרות על סמך השדה שצוין של קוד העבודה או קוד הקריטריונים.
         //זכור להתאים את הלוגיקה של השיטה ושמות המאפיינים בהתאם ליישום שלך בפועל
-        public List<Job> GetByEmployer(int employerCode)
-        {
-            try
-            {
-                return context.Jobs
-                    .Where(j => j.EmployersCode == employerCode)
-                    .Include(j => j.CriteriaCodeNavigation)
-                    .Include(j => j.EmployersCodeNavigation)
-                    .Include(j => j.FieldOfWorkCodeNavigation)
-                    .ToList();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.ToString());
-                throw new Exception("Failed to get Jobs by Employer");
-            }
-        }
+        //public List<Job> GetByEmployer(int employerCode)
+        //{
+        //    try
+        //    {
+        //        return context.Jobs
+        //            .Where(j => j.EmployersCode == employerCode)
+        //            .Include(j => j.CriteriaCodeNavigation)
+        //            .Include(j => j.EmployersCodeNavigation)
+        //            .Include(j => j.FieldOfWorkCodeNavigation)
+        //            .ToList();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine(ex.ToString());
+        //        throw new Exception("Failed to get Jobs by Employer");
+        //    }
+        //}
 
-        public List<Job> GetByFieldOfWork(int fieldOfWorkCode)
-        {
-            try
-            {
-                return context.Jobs
-                    .Where(j => j.FieldOfWorkCode == fieldOfWorkCode)
-                    .Include(j => j.CriteriaCodeNavigation)
-                    .Include(j => j.EmployersCodeNavigation)
-                    .Include(j => j.FieldOfWorkCodeNavigation)
-                    .ToList();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.ToString());
-                throw new Exception("Failed to get Jobs by Field of Work");
-            }
-        }
+        //public List<Job> GetByFieldOfWork(int fieldOfWorkCode)
+        //{
+        //    try
+        //    {
+        //        return context.Jobs
+        //            .Where(j => j.FieldOfWorkCode == fieldOfWorkCode)
+        //            .Include(j => j.CriteriaCodeNavigation)
+        //            .Include(j => j.EmployersCodeNavigation)
+        //            .Include(j => j.FieldOfWorkCodeNavigation)
+        //            .ToList();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine(ex.ToString());
+        //        throw new Exception("Failed to get Jobs by Field of Work");
+        //    }
+        //}
 
-        public List<Job> GetByCriteria(int criteriaCode)
-        {
-            try
-            {
-                return context.Jobs
-                    .Where(j => j.CriteriaCode == criteriaCode)
-                    .Include(j => j.CriteriaCodeNavigation)
-                    .Include(j => j.EmployersCodeNavigation)
-                    .Include(j => j.FieldOfWorkCodeNavigation)
-                    .ToList();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.ToString());
-                throw new Exception("Failed to get Jobs by Criteria");
-            }
-        }
+        //public List<Job> GetByCriteria(int criteriaCode)
+        //{
+        //    try
+        //    {
+        //        return context.Jobs
+        //            .Where(j => j.CriteriaCode == criteriaCode)
+        //            .Include(j => j.CriteriaCodeNavigation)
+        //            .Include(j => j.EmployersCodeNavigation)
+        //            .Include(j => j.FieldOfWorkCodeNavigation)
+        //            .ToList();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine(ex.ToString());
+        //        throw new Exception("Failed to get Jobs by Criteria");
+        //    }
+        //}
 
        
         }

@@ -12,34 +12,46 @@ namespace Bl.Bl_Implementation
     {
         private readonly IJobRepo _jobRepo;
 
-        public BlJob(DalManager dalManager)
+        public BlJob(DalManager manager)
         {
-            _jobRepo = dalManager.job;
+            _jobRepo = manager.job;
         }
 
         public List<JobDTO> GetAll()
         {
             try
             {
-                List<Job> jobs = _jobRepo.GetAll();
+                var jobs = _jobRepo.GetAll();
 
-                List<JobDTO> jobDTOs = jobs.Select(job => new JobDTO
+                var jobDTOs = jobs.Select(j => new JobDTO
                 {
-                    Code = job.Code,
-                    EmployersCode = job.EmployersCode,
-                    FieldOfWorkCode = job.FieldOfWorkCode,
-                    CriteriaCode = job.CriteriaCode,
+                    Code = j.Code,
+                    EmployersCode = j.EmployersCode,
+                    FieldOfWorkCode = j.FieldOfWorkCode,
+                    CriteriaCode = j.CriteriaCode,
                     CriteriaCodeNavigation = new CriterionDTO
                     {
-                        
+                        Code = j.CriteriaCodeNavigation.Code,
+                        SeveralYearsOfExperience = j.CriteriaCodeNavigation.SeveralYearsOfExperience,
+                        Car = j.CriteriaCodeNavigation.Car,
+                        NumberOfCvsSent = j.CriteriaCodeNavigation.NumberOfCvsSent,
+                        Salary = j.CriteriaCodeNavigation.Salary,
+                        Descriptions = j.CriteriaCodeNavigation.Descriptions
                     },
                     EmployersCodeNavigation = new EmployerDTO
                     {
-                        // Populate properties of EmployerDTO here
+                        Code = j.EmployersCodeNavigation.Code,
+                        Email = j.EmployersCodeNavigation.Email,
+                        Phone = j.EmployersCodeNavigation.Phone,
+                        Firstname = j.EmployersCodeNavigation.Firstname,
+                        Lastname = j.EmployersCodeNavigation.Lastname,
+                        CompanyName = j.EmployersCodeNavigation.CompanyName,
+                        CompanyAddress = j.EmployersCodeNavigation.CompanyAddress
                     },
                     FieldOfWorkCodeNavigation = new FieldOfWorkDTO
                     {
-                        // Populate properties of FieldOfWorkDTO here
+                        Code = j.FieldOfWorkCodeNavigation.Code,
+                        FieldOfWorkName = j.FieldOfWorkCodeNavigation.FieldOfWorkName
                     }
                 }).ToList();
 
@@ -47,69 +59,167 @@ namespace Bl.Bl_Implementation
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to get all jobs", ex);
+                // התנהגות מתאימה לטיפול בשגיאות
+                throw;
             }
         }
 
-        public JobDTO Create(JobDTO job)
+        //public JobDTO GetJobByCode(int code)
+        //{
+        //    try
+        //    {
+        //        var job = _jobRepo.GetByCode(code);
+
+        //        if (job == null)
+        //        {
+        //            throw new Exception("Job not found");
+        //        }
+
+        //        var jobDTO = new JobDTO
+        //        {
+        //            Code = job.Code,
+        //            EmployersCode = job.EmployersCode,
+        //            FieldOfWorkCode = job.FieldOfWorkCode,
+        //            CriteriaCode = job.CriteriaCode,
+        //            CriteriaCodeNavigation = new CriterionDTO
+        //            {
+        //                Code = job.CriteriaCodeNavigation.Code,
+        //                SeveralYearsOfExperience = job.CriteriaCodeNavigation.SeveralYearsOfExperience,
+        //                Car = job.CriteriaCodeNavigation.Car,
+        //                NumberOfCvsSent = job.CriteriaCodeNavigation.NumberOfCvsSent,
+        //                Salary = job.CriteriaCodeNavigation.Salary,
+        //                Descriptions = job.CriteriaCodeNavigation.Descriptions
+        //            },
+        //            EmployersCodeNavigation = new EmployerDTO
+        //            {
+        //                Code = job.EmployersCodeNavigation.Code,
+        //                Email = job.EmployersCodeNavigation.Email,
+        //                Phone = job.EmployersCodeNavigation.Phone,
+        //                Firstname = job.EmployersCodeNavigation.Firstname,
+        //                Lastname = job.EmployersCodeNavigation.Lastname,
+        //                CompanyName = job.EmployersCodeNavigation.CompanyName,
+        //                CompanyAddress = job.EmployersCodeNavigation.CompanyAddress
+        //            },
+        //            FieldOfWorkCodeNavigation = new FieldOfWorkDTO
+        //            {
+        //                Code = job.FieldOfWorkCodeNavigation.Code,
+        //                FieldOfWorkName = job.FieldOfWorkCodeNavigation.FieldOfWorkName
+        //            }
+        //        };
+
+        //        return jobDTO;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // התנהגות מתאימה לטיפול בשגיאות
+        //        throw;
+        //    }
+        //}
+
+        public JobDTO Create(JobDTO jobDTO)
         {
-            Job j = new Job
+            try
             {
-                Code = job.Code,
-                EmployersCode = job.EmployersCode,
-                FieldOfWorkCode = job.FieldOfWorkCode,
-                CriteriaCode = job.CriteriaCode
-            };
+                var jobEntity = new Job
+                {
+                    // המרת ה-DTO ל-Entity
+                    Code = jobDTO.Code,
+                    EmployersCode = jobDTO.EmployersCode,
+                    FieldOfWorkCode = jobDTO.FieldOfWorkCode,
+                    CriteriaCode = jobDTO.CriteriaCode
+                };
 
-            _jobRepo.Create(j);
+                // קריאה לפונקציה המתאימה ב-DAL ליצירת ה-Entity
+                _jobRepo.Create(jobEntity);
 
-            return job;
+                // החזרת ה-Entity המתאימה בצורת DTO
+                return jobDTO;
+            }
+            catch (Exception ex)
+            {
+                // התנהגות מתאימה לטיפול בשגיאות
+                throw;
+            }
+        }
+
+        public JobDTO Update(int code, JobDTO updatedJobDTO)
+        {
+            try
+            {
+                var existingJob = _jobRepo.GetAll().FirstOrDefault(x => x.Code == code);
+
+                if (existingJob == null)
+                {
+                    throw new Exception("Job not found");
+                }
+
+                // העתקת הנתונים מה-DTO המעודכן ל-Entity הקיים
+                existingJob.EmployersCode = updatedJobDTO.EmployersCode;
+                existingJob.FieldOfWorkCode = updatedJobDTO.FieldOfWorkCode;
+                existingJob.CriteriaCode = updatedJobDTO.CriteriaCode;
+
+                // קריאה לפונקציה המתאימה ב-DAL לעדכון ה-Entity
+                _jobRepo.Update(code, existingJob);
+
+                // החזרת ה-Entity המתאים בצורת DTO
+                return updatedJobDTO;
+            }
+            catch (Exception ex)
+            {
+                // התנהגות מתאימה לטיפול בשגיאות
+                throw;
+            }
         }
 
         public JobDTO Delete(int code)
         {
-            Job j = _jobRepo.Delete(code);
-             
-            return new JobDTO
+            try
             {
-                Code = j.Code,
-                EmployersCode = j.EmployersCode,
-                FieldOfWorkCode = j.FieldOfWorkCode,
-                CriteriaCode = j.CriteriaCode
-            };
-        }
+                var deletedJob = _jobRepo.Delete(code);
 
-        //public void Update(int code, Job item)
-        //{
-        //    try
-        //    {
-        //        Job jobToUpdate = _jobRepo.GetByCode(jobDTO.Code);
+                if (deletedJob == null)
+                {
+                    throw new Exception("Job not found");
+                }
 
-        //        if (jobToUpdate == null)
-        //        {
-        //            throw new Exception("Job not found for updating");
-        //        }
-
-        //        // Update the job entity with the data from the JobDTO
-        //        jobToUpdate.EmployersCode = jobDTO.EmployersCode;
-        //        jobToUpdate.FieldOfWorkCode = jobDTO.FieldOfWorkCode;
-        //        jobToUpdate.CriteriaCode = jobDTO.CriteriaCode;
-
-        //        // You can update the related entities as well if needed
-        //        jobToUpdate.CriteriaCodeNavigation.SeveralYearsOfExperience = jobDTO.CriteriaCodeNavigation.SeveralYearsOfExperience;
-        //        // Update other properties as needed for CriteriaCodeNavigation, EmployersCodeNavigation, and FieldOfWorkCodeNavigation
-
-        //        _jobRepo.Update(jobToUpdate);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception("Failed to update job", ex);
-        //    }
-        //}
-
-        public JobDTO Update(int code, JobDTO item)
-        {
-            throw new NotImplementedException();
+                // החזרת ה-Entity המתאימה בצורת DTO
+                return new JobDTO
+                {
+                    Code = deletedJob.Code,
+                    EmployersCode = deletedJob.EmployersCode,
+                    FieldOfWorkCode = deletedJob.FieldOfWorkCode,
+                    CriteriaCode = deletedJob.CriteriaCode,
+                    CriteriaCodeNavigation = new CriterionDTO
+                    {
+                        Code = deletedJob.CriteriaCodeNavigation.Code,
+                        SeveralYearsOfExperience = deletedJob.CriteriaCodeNavigation.SeveralYearsOfExperience,
+                        Car = deletedJob.CriteriaCodeNavigation.Car,
+                        NumberOfCvsSent = deletedJob.CriteriaCodeNavigation.NumberOfCvsSent,
+                        Salary = deletedJob.CriteriaCodeNavigation.Salary,
+                        Descriptions = deletedJob.CriteriaCodeNavigation.Descriptions
+                    },
+                    EmployersCodeNavigation = new EmployerDTO
+                    {
+                        Code = deletedJob.EmployersCodeNavigation.Code,
+                        Email = deletedJob.EmployersCodeNavigation.Email,
+                        Phone = deletedJob.EmployersCodeNavigation.Phone,
+                        Firstname = deletedJob.EmployersCodeNavigation.Firstname,
+                        Lastname = deletedJob.EmployersCodeNavigation.Lastname,
+                        CompanyName = deletedJob.EmployersCodeNavigation.CompanyName,
+                        CompanyAddress = deletedJob.EmployersCodeNavigation.CompanyAddress
+                    },
+                    FieldOfWorkCodeNavigation = new FieldOfWorkDTO
+                    {
+                        Code = deletedJob.FieldOfWorkCodeNavigation.Code,
+                        FieldOfWorkName = deletedJob.FieldOfWorkCodeNavigation.FieldOfWorkName
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                // התנהגות מתאימה לטיפול בשגיאות
+                throw;
+            }
         }
     }
 }
