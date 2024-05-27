@@ -9,10 +9,10 @@ namespace FindJobs.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FieldOfWorkController : ControllerBase
+    public class FieldsOfWorkController : ControllerBase
     {
         IBlFieldOfWork blFieldOfWork;
-        public FieldOfWorkController(BlManager manager)
+        public FieldsOfWorkController(BlManager manager)
         {
             blFieldOfWork = manager.fieldOfWorkServices;
         }

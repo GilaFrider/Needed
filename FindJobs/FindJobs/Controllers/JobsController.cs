@@ -9,11 +9,11 @@ namespace FindJobs.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class JobController : ControllerBase
+    public class JobsController : ControllerBase
     {
         private readonly IBlJob _jobService;
 
-        public JobController(BlManager manager)
+        public JobsController(BlManager manager)
         {
             _jobService = manager.jobServices;
         }
@@ -52,18 +52,21 @@ namespace FindJobs.Controllers
         }
 
         [HttpPost]
-        public ActionResult<JobDTO> CreateJob(JobDTO jobDTO)
+        public IActionResult CreateJob([FromBody] JobDTO jobDTO)
         {
             try
             {
+                // Process job creation logic here (similar to your existing Create method)
                 var createdJob = _jobService.Create(jobDTO);
-                return CreatedAtAction(nameof(GetJobByCode), new { code = createdJob.Code }, createdJob);
+
+                return Ok(createdJob); // Return a success response
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+                return StatusCode(500, "An error occurred while creating the job."); // Return an error response
             }
         }
+
 
         [HttpPut("{code}")]
         public ActionResult<JobDTO> UpdateJob(int code, JobDTO updatedJobDTO)

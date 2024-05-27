@@ -123,12 +123,10 @@ namespace Bl.Bl_Implementation
                 var jobEntity = new Job
                 {
                     // המרת ה-DTO ל-Entity
-                    Code = jobDTO.Code,
                     EmployersCode = jobDTO.EmployersCode,
                     FieldOfWorkCode = jobDTO.FieldOfWorkCode,
                     CriteriaCode = jobDTO.CriteriaCode
                 };
-
                 // קריאה לפונקציה המתאימה ב-DAL ליצירת ה-Entity
                 _jobRepo.Create(jobEntity);
 

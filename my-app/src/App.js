@@ -1,58 +1,47 @@
 import React from "react";
+import { useState, useEffect } from 'react';
+
 import axios from "axios";
  
-class App extends React.Component {
-    state = {
-        newfiles: null,
-    };
- 
-    // handleFile(e) {
-    //     // Getting the files from the input
-    //     let newfiles = e.target.newfiles;
-    //     this.setState({ newfiles });
-    // }
- 
-    handleUpload(e) {
-    //     let newfiles = this.state.newfiles;
- 
-    //     let formData = new FormData();
- 
-    //     // Adding files to the formdata
-    //     formData.append("image", newfiles);
-    //     formData.append("name", "Name");
- 
-        axios({
-            // Endpoint to send files
-            url: "http://localhost:5152/api/FieldOfWork",
-            method: "GET",
-            headers: {
-                // Add any auth token here
-                authorization: "your token comes here",
-            },
- 
-            // Attaching the form data
-            // data: formData,
-        })
-            // Handle the response from backend here
-            .then((res) => {})
- 
-            // Catch errors if any
-            .catch((err) => {});
-    }
- 
-    render() {
+function App() {
+
+        // const createJob =  () => {
+        //     const jobData = {
+        //         EmployersCode: 'ABC123',
+        //         FieldOfWorkCode: 'IT',
+        //         CriteriaCode: 'A'
+        //     };
+    
+        //     try {
+        //         const response = axios.post('http://localhost:5152/api/jobs', jobData);
+        //         console.log('Job created successfully on the server: ', response.data);
+        //     } catch (error) {
+        //         console.error('Error creating job: ', error);
+        //     }
+        // };
+        const GetJobs = () => {
+          const [jobs, setJobs] = useState([]);
+      
+          useEffect(() => {
+              const fetchData =  () => {
+                  try {
+                      const response =  axios.get('http://localhost:5152/api/jobs');
+                      console.log('Jobs fetched successfully from the server: ', response.data);
+                      setJobs(response.data);
+                  } catch (error) {
+                      console.error('Error fetching jobs: ', error);
+                  }
+              };
+      
+              fetchData();
+          }, []);
+        }
         return (
-            <div>
-                <h1>Select your files</h1>
-                
-                <button
-                    onClick={(e) => this.handleUpload(e)}
-                >
-                    Send Files
-                </button>
-            </div>
+          <div>
+          <h2>Jobs:</h2>
+          <GetJobs />
+          </div>
         );
+
     }
-}
- 
 export default App;
