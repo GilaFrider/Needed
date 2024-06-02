@@ -1,1 +1,8 @@
-export default function AdvertiseJob(){}
+export default function AdvertiseJob(){
+    
+    return(
+        <div>
+
+        </div>
+    )
+}

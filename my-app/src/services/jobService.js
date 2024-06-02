@@ -10,16 +10,16 @@ export const getJobsService = async () => {
       });
 }
 
-//post
-export const addJobService = async(newJob) => {
-    console.log("addJobService ");
-    const response=await axios.post("/jobs",newJob);
-    const job=await response.data;
-    return job;
+// post
+// export const addJobService = async(newJob) => {
+//     console.log("addJobService ");
+//     return await axios.post("/jobs",newJob);
+//     const job=await response.data;
+//     return job;
 
-}
+// }
 
-//update
+// //update
 // export const updateJobService = async (id, job) =>{
 //     console.log("updatejobService");
 //     const response = await axios.put(`/jobs/${id}`,job);

@@ -16,14 +16,14 @@ export const getJobsThunk = () => {
 }
 
 //add
-export const addJobThunk = (newjob) => {
-    console.log("addJobThunk ")
-    return async (dispatch) => {
-        const job = await addJobService(newjob)
-        dispatch(addJob(job))
-        return job;
-    }
-}
+// export const addJobThunk = (newjob) => {
+//     console.log("addJobThunk ")
+//     return async (dispatch) => {
+//         const job = await addJobService(newjob)
+//         dispatch(addJob(job))
+//         return job;
+//     }
+// }
 
 
 //update

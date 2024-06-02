@@ -9,6 +9,7 @@ namespace Bl
     {
         public IBlFieldOfWork fieldOfWorkServices { get; }
         public IBlJob jobServices { get; }
+        public IBlEmployer employerServices { get; }
         //.....
 
         public BlManager()
@@ -17,11 +18,14 @@ namespace Bl
             services.AddScoped<DalManager>();
 
             services.AddScoped<IBlFieldOfWork, BlFieldOfWork>();
+         
             services.AddScoped<IBlJob, BlJob>();
+            services.AddScoped<IBlEmployer, BlEmployer>();
             //.....
             ServiceProvider servicesProvider = services.BuildServiceProvider();
 
             fieldOfWorkServices = (BlFieldOfWork) servicesProvider.GetService<IBlFieldOfWork>();
+            employerServices= (BlEmployer) servicesProvider.GetRequiredService<IBlEmployer>();
             jobServices = (BlJob)servicesProvider.GetService<IBlJob>();
         }
     }

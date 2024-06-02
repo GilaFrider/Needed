@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 using Bl.DTO;
 using DataBase.Models;
 using System.Numerics;
+using Bl.Bl_Api;
 
 namespace Bl.Bl_Implementation
 {
-    public class BlEmployer
+    public class BlEmployer:IBlEmployer
     {
-        IEmployerRepo _EmployerRepo;
+        private readonly IEmployerRepo _EmployerRepo;
         public BlEmployer(DalManager dalManager)
         {
             _EmployerRepo = dalManager.employer;
