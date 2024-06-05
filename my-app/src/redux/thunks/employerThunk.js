@@ -1,5 +1,5 @@
 import { addEmployer,setEmployer } from "../slices/employerSlice";
-import {getEmployersService} from "../../services/employerService";
+import {getEmployersService, addEmployersService} from "../../services/employerService";
 
 
 
@@ -9,4 +9,8 @@ export const getEmployersThunk = () => {
         const employers = await getEmployersService();
         dispatch(setEmployer(employers));
     }
+}
+export const addEmployersThunk =  (employee) => {
+    return async (dispatch) =>
+    await dispatch(addEmployer(employee));
 }

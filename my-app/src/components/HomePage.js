@@ -4,6 +4,8 @@ import { getJobsThunk } from '../redux/thunks/jobThunk';
 import { getEmployersThunk } from '../redux/thunks/employerThunk';
 import { getJobsService } from '../services/jobService';
 import { useSelector, useDispatch } from 'react-redux';
+import RegisterComponent from '../components/RegisterComponent';
+import Employee from '../components/Employee';
 
 export default function HomePage() {
   //  axios.get('https://localhost:7038/api/jobs')
@@ -20,6 +22,7 @@ export default function HomePage() {
     
     <div>
       <h1>Hello World</h1>
+     <Employee/>
       <button onClick={() => dispatch(getEmployersThunk())}>rrrrr</button>
       <button onClick={() => dispatch(getJobsThunk())}>fffff</button>
      

@@ -12,7 +12,7 @@ function App() {
         return (
           <Provider store={store}>
             <HomePage/> 
-            <Employee/> 
+          
         </Provider>
         );
 
