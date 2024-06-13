@@ -1,20 +1,21 @@
+import React from 'react';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 import store from './redux/store';
-import { useState, useEffect } from 'react';
+import NavBar from './components/NavBar';
+import AppRoutes from './routes/AppRoutes';
 
-import axios from "axios";    
-import HomePage from "./components/HomePage";
-import Employee from './components/Employee';
- 
-function App() {
+const App = () => {
+  return (
+    <Provider store={store}>
+      <Router>
+        <div>
+          <NavBar />
+          <AppRoutes />
+        </div>
+      </Router>
+    </Provider>
+  );
+};
 
-        
-        return (
-          <Provider store={store}>
-            <HomePage/> 
-          
-        </Provider>
-        );
-
-    }
 export default App;

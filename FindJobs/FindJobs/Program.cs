@@ -1,13 +1,12 @@
 
-using Bl;
+using Services;
 using DataAccessLayer;
-using DataBase.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddScoped<BlManager>();
+builder.Services.AddScoped<ManagerService>();
 
 builder.Services.AddControllers();
 

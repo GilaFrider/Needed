@@ -1,8 +1,12 @@
-﻿using Bl.Bl_Api;
-using Bl.DTO;
-using Bl;
+﻿using Services;
+using Services.Api_Service;
+using Services.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace FindJobs.Controllers
 {
@@ -10,10 +14,30 @@ namespace FindJobs.Controllers
     [ApiController]
     public class EmployersController : ControllerBase
     {
-        IBlEmployer blEmployer;
-        public EmployersController(BlManager manager)
+        IEmployerService blEmployer;
+        public EmployersController(ManagerService manager)
         {
             blEmployer = manager.employerServices;
+        }
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] Login login)
+        {
+            var employer = blEmployer.GetAll()
+                .FirstOrDefault(e => e.Email == login.Email && e.Password == login.Password);
+
+            if (employer == null)
+            {
+                return Unauthorized();
+            }
+            if (employer == null )
+            {
+                return Unauthorized();
+            }
+            // Optional: Generate and return JWT token or any other response
+            // var token = GenerateToken(employer.Email);
+            // return Ok(new { Token = token });
+
+            return Ok(new { Message = "Login successful!" });
         }
         [HttpGet]
         public ActionResult<List<EmployerDTO>> GetAll()
@@ -41,7 +65,7 @@ namespace FindJobs.Controllers
                 return StatusCode(500, "An error occurred while creating the job."); // Return an error response
             }
         }
-
+   
 
         [HttpPut("{code}")]
         public ActionResult<EmployerDTO> UpdateJob(int code, EmployerDTO updatedJobDTO)

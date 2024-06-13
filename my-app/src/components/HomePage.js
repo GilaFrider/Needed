@@ -1,31 +1,37 @@
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchJobs } from '../redux/thunks/jobThunk';
 
-import axios from 'axios';
-import { getJobsThunk } from '../redux/thunks/jobThunk';
-import { getEmployersThunk } from '../redux/thunks/employerThunk';
-import { getJobsService } from '../services/jobService';
-import { useSelector, useDispatch } from 'react-redux';
-import RegisterComponent from '../components/RegisterComponent';
-import Employee from '../components/Employee';
-
-export default function HomePage() {
-  //  axios.get('https://localhost:7038/api/jobs')
-  //  .then(res => {
-  //   const jobs = res.data;
-  //   console.log(jobs);
-  // })
-  // const jobs2 = getJobsService()
-  //   console.log(jobs2);
+const HomePage = () => {
   const dispatch = useDispatch();
-  // const jobs3 = useSelector((state) => state.jobSlice.jobs)
+  const { jobs, status, error } = useSelector((state) => state.jobs);
+
+  useEffect(() => {
+    dispatch(fetchJobs());
+  }, [dispatch]);
+
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
+
+  if (status === 'failed') {
+    return <div>Error: {error}</div>;
+  }
+
   return (
-     
-    
     <div>
-      <h1>Hello World</h1>
-     <Employee/>
-      <button onClick={() => dispatch(getEmployersThunk())}>rrrrr</button>
-      <button onClick={() => dispatch(getJobsThunk())}>fffff</button>
-     
+      <h1>Job Listings</h1>
+      <ul>
+        {jobs.map((job) => (
+          <li key={job.code}>
+            <h2>{job.fieldOfWorkCodeNavigation?.fieldOfWorkName}</h2>
+            <p>מספר שנות נסיון: {job.criteriaCodeNavigation?.severalYearsOfExperience}</p>
+            <p><strong>Employer:</strong> {job.employersCodeNavigation?.companyName}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
-}
+};
+
+export default HomePage;

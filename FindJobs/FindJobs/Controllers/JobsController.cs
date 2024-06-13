@@ -1,6 +1,6 @@
-﻿using Bl;
-using Bl.Bl_Api;
-using Bl.DTO;
+﻿using Services;
+using Services.Api_Service;
+using Services.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,9 +11,9 @@ namespace FindJobs.Controllers
     [Route("api/[controller]")]
     public class JobsController : ControllerBase
     {
-        private readonly IBlJob _jobService;
+        private readonly IJobService _jobService;
 
-        public JobsController(BlManager manager)
+        public JobsController(ManagerService manager)
         {
             _jobService = manager.jobServices;
         }

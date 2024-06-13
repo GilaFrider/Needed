@@ -1,12 +1,14 @@
-import {configureStore} from '@reduxjs/toolkit'
-import jobSlice from './slices/jobSlice';
-import employerSlice from './slices/employerSlice';
+import { configureStore } from '@reduxjs/toolkit';
+import authReducer from './slices/authSlice.js';
+import jobReducer from './slices/jobSlice';
+import employerReducer from './slices/employerSlice';
+
 const store = configureStore({
-    reducer: {
-        employerSlice,
-        jobSlice,
-        
-    }
-})
+  reducer: {
+    auth: authReducer,
+    jobs: jobReducer,
+    employers: employerReducer,
+  },
+});
 
 export default store;

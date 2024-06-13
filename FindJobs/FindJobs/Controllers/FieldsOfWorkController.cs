@@ -1,7 +1,6 @@
-﻿using Bl;
-using Bl.Bl_Api;
-using Bl.Bl_Implementation;
-using Bl.DTO;
+﻿using Services;
+using Services.Api_Service;
+using Services.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,8 +10,8 @@ namespace FindJobs.Controllers
     [ApiController]
     public class FieldsOfWorkController : ControllerBase
     {
-        IBlFieldOfWork blFieldOfWork;
-        public FieldsOfWorkController(BlManager manager)
+        IFieldOfWorkService blFieldOfWork;
+        public FieldsOfWorkController(ManagerService manager)
         {
             blFieldOfWork = manager.fieldOfWorkServices;
         }

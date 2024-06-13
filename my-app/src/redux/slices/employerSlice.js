@@ -1,20 +1,28 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
+import { addEmployer } from '../thunks/employerThunk';
 
-export const employerSlice = createSlice({
-    name: 'employers',
-    initialState: {
-        employers: undefined,
-    },
-    reducers: {
-        addEmployer: (state, action) => {
-            if(state.employers!== undefined){
-                state.employers.push(action.payload)
-            }
-        },
-        setEmployer: (state, action) => {
-            state.employers = action.payload
-        }
-    }
+const employerSlice = createSlice({
+  name: 'employers',
+  initialState: {
+    employers: [],
+    status: 'idle',
+    error: null,
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(addEmployer.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(addEmployer.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.employers.push(action.payload);
+      })
+      .addCase(addEmployer.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      });
+  },
 });
-export const { addEmployer, setEmployer } = employerSlice.actions;
+
 export default employerSlice.reducer;

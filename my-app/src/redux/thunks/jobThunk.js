@@ -1,37 +1,26 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from '../../utils/axios';
 
-import { addJob  , setJob } from '../slices/jobSlice';
-// import { setUser ,updateUser} from '../slices/auth.slice';
-import { getJobsService, addJobService ,updateJobService} from '../../services/jobService';
-
-
-// get
-export const getJobsThunk = () => {
-    console.log("getJobsThunk ");
-    return async (dispatch) => {
-        const jobs = await getJobsService();
-        dispatch(setJob(jobs))
-        console.log(jobs);
-        // מבצע את הפעולה שברדוסר
+export const fetchJobs = createAsyncThunk(
+  'jobs/fetchJobs',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get('/jobs');
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
     }
-}
+  }
+);
 
-//add
-// export const addJobThunk = (newjob) => {
-//     console.log("addJobThunk ")
-//     return async (dispatch) => {
-//         const job = await addJobService(newjob)
-//         dispatch(addJob(job))
-//         return job;
-//     }
-// }
-
-
-//update
-// export const updateJobThunk = (id, job)=>{
-//     console.log("updatejobThunk");
-//     return async (dispatch)=>{
-//         const job_= await updateJobService(id, job);
-//         console.log(job);
-//         return await dispatch(setJob(job));
-//     }
-// }
+export const addJob = createAsyncThunk(
+  'jobs/addJob',
+  async (jobData, { rejectWithValue }) => {
+    try {
+      const response = await axios.post('/jobs', jobData);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
