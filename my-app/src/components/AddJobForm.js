@@ -1,73 +1,45 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchFieldOfWorks, addJob } from '../redux/thunks/jobThunk'; // Adjust import paths accordingly
+//import { fetchFieldOfWorks, addJob } from '../redux/thunks/jobThunk'; // Adjust import paths accordingly
 
 const AddJobForm = ({ onAddJob }) => {
+  const dispatch = useDispatch();
+  const { fieldOfWorks } = useSelector(state => state.fieldOfWorks);
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    location: '',
-    salary: ''
+    fieldOfWorkCode: '',
+    criteriaCode: '',
+    // other job fields
   });
+
+  useEffect(() => {
+    dispatch(fetchFieldOfWorks());
+  }, [dispatch]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onAddJob(formData);
-    setFormData({
-      title: '',
-      description: '',
-      location: '',
-      salary: ''
-    });
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label>Title</label>
-        <input
-          type="text"
-          name="title"
-          value={formData.title}
-          onChange={handleChange}
-          required
-        />
+        <label>Field of Work:</label>
+        <select name="fieldOfWorkCode" value={formData.fieldOfWorkCode} onChange={handleChange} required>
+          <option value="">Select Field of Work</option>
+          {fieldOfWorks.map((field) => (
+            <option key={field.code} value={field.code}>
+              {/* {field.FieldOfWorkName} */}
+            </option>
+          ))}
+        </select>
       </div>
-      <div>
-        <label>Description</label>
-        <textarea
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label>Location</label>
-        <input
-          type="text"
-          name="location"
-          value={formData.location}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label>Salary</label>
-        <input
-          type="number"
-          name="salary"
-          value={formData.salary}
-          onChange={handleChange}
-          required
-        />
-      </div>
+      {/* Add other job fields here */}
       <button type="submit">Add Job</button>
     </form>
   );

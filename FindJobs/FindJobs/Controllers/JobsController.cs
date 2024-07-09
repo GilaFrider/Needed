@@ -4,6 +4,9 @@ using Services.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
+using System.Security.Claims;
 
 namespace FindJobs.Controllers
 {
@@ -12,10 +15,12 @@ namespace FindJobs.Controllers
     public class JobsController : ControllerBase
     {
         private readonly IJobService _jobService;
+        private readonly IEmployerService _employerService;
 
         public JobsController(ManagerService manager)
         {
             _jobService = manager.jobServices;
+            _employerService = manager.employerServices;
         }
 
         [HttpGet]
@@ -50,12 +55,26 @@ namespace FindJobs.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
-
+        [Authorize(Roles = "Employer")]
         [HttpPost]
         public IActionResult CreateJob([FromBody] JobDTO jobDTO)
         {
+
             try
             {
+                var email = User.FindFirst(ClaimTypes.Email)?.Value;
+                if (email == null)
+                {
+                    return Unauthorized();
+                }
+                var employer = _employerService.GetEmployerByEmail(email);
+                if (employer == null)
+                {
+                    return NotFound("Employer not found.");
+                }
+
+                jobDTO.EmployersCode = employer.Code; // Assuming JobDTO has an EmployerCode property
+                
                 // Process job creation logic here (similar to your existing Create method)
                 var createdJob = _jobService.Create(jobDTO);
 

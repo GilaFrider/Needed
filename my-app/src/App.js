@@ -1,21 +1,30 @@
+// src/App.js
 import React from 'react';
-import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
-import store from './redux/store';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar';
-import AppRoutes from './routes/AppRoutes';
+import Login from './components/Login';
+import EmployerDashboard from './components/EmployerDashboard';
+import ProtectedRoute from './components/ProtectedRoute';
+import AddEmployer from './components/AddEmployer';
+import AddJobForm from './components/AddJobForm';
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <Router>
-        <div>
-          <NavBar />
-          <AppRoutes />
-        </div>
-      </Router>
-    </Provider>
+    <Router>
+      <NavBar />
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/add-employer" element={<AddEmployer />} />
+        <Route path="/add-job" element={ <AddJobForm/>} />
+        <Route path="/dashboard" element={<EmployerDashboard />} />
+        {/* <Route path='/protected' element={<ProtectedRoute/>} /> */}
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </Router>
   );
 };
 
+const Home = () => <h1>Home</h1>;
+
 export default App;
+

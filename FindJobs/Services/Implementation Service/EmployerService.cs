@@ -96,6 +96,25 @@ namespace Services.Implementation_Service
         {
             throw new NotImplementedException();
         }
+
+        public EmployerDTO GetEmployerByEmail(string email)
+        {
+            var employer = _EmployerRepo.GetEmployerByEmail(email);
+            if (employer == null)
+            {
+                return null;
+            }
+            var employerDTO = new EmployerDTO();
+            employerDTO.Code = employer.Code;
+            employerDTO.Email = employer.Email;
+            employerDTO.Password = employer.Password;
+            employerDTO.Phone = employer.Phone;
+            employerDTO.Firstname = employer.Firstname;
+            employerDTO.Lastname = employer.Lastname;
+            employerDTO.CompanyName = employer.CompanyName;
+            employerDTO.CompanyAddress = employer.CompanyAddress;
+            return employerDTO;
+        }
     }
 }
 

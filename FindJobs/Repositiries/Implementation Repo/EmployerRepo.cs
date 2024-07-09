@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repositiries.Implementation_Repo
 {
@@ -64,6 +65,19 @@ namespace Repositiries.Implementation_Repo
         public Employer GetByCode(int code)
         {
             throw new NotImplementedException();
+        }
+
+        public Employer GetEmployerByEmail(string email)
+        {
+            try
+            {
+                return context.Employers.FirstOrDefault(e => e.Email == email);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                throw new Exception("Failed");
+            }
         }
 
         public Employer Update(int code, Employer employer)

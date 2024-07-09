@@ -9,5 +9,6 @@ namespace Services.Api_Service
 {
     public interface IEmployerService:IRepositoryService<EmployerDTO>
     {
+        EmployerDTO GetEmployerByEmail(string email);
     }
 }

@@ -38,5 +38,18 @@ namespace Repositiries.Implementation_Repo
                 throw new Exception("Failed to add a new Field Of Work");
             }
         }
+
+        public FieldOfWork GetByName(string name)
+        {
+            try
+            {
+                return context.FieldOfWorks.FirstOrDefault(x=>x.FieldOfWorkName == name);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                throw new Exception("Failed to display all Field Of Work");
+            }
+        }
     }
 }

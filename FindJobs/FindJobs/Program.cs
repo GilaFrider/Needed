@@ -1,6 +1,8 @@
 
 using Services;
-using DataAccessLayer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,12 +25,10 @@ builder.Services.AddCors(options =>
     });
 });
 
-//DBActions actions = new DBActions(builder.Configuration);
-//var connString = actions.GetConnectionString("AcademyDB")
-//builder.Services.AddDbContext<Context>(opt => opt.UseSqlServer(connString));
-
 var app = builder.Build();
 app.MapControllers();
 app.UseCors();
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapGet("/", () => "Hello World!");
 app.Run();

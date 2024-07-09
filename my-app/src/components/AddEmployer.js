@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addEmployer } from '../redux/thunks/employerThunk';
 
-const AddEmployerForm = () => {
+const AddEmployer = () => {
   const dispatch = useDispatch();
   const { status, error } = useSelector((state) => state.employers);
 
@@ -96,4 +96,4 @@ const AddEmployerForm = () => {
   );
 };
 
-export default AddEmployerForm;
+export default AddEmployer;

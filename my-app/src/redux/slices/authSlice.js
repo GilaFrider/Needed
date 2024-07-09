@@ -1,35 +1,39 @@
+// src/redux/slices/authSlice.js
 import { createSlice } from '@reduxjs/toolkit';
+import { employerLogin } from '../thunks/authThunk';
 
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    user: null,
     isAuthenticated: false,
-    loading: false,
-    error: null
+    user: null,
+    status: 'idle',
+    error: null,
   },
   reducers: {
-    loginRequest: (state) => {
-      state.loading = true;
-    },
-    loginSuccess: (state, action) => {
-      state.loading = false;
-      state.user = action.payload;
-      state.isAuthenticated = true;
-      state.error = null;
-    },
-    loginFailure: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-      state.isAuthenticated = false;
-    },
     logout: (state) => {
-      state.user = null;
       state.isAuthenticated = false;
-      state.error = null;
-    }
-  }
+      state.user = null;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(employerLogin.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(employerLogin.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.isAuthenticated = true;
+        state.user = action.payload;
+        state.error = null;
+      })
+      .addCase(employerLogin.rejected, (state, action) => {
+        state.status = 'failed';
+        state.isAuthenticated = false;
+        state.error = action.payload;
+      });
+  },
 });
 
-export const { loginRequest, loginSuccess, loginFailure, logout } = authSlice.actions;
+export const { logout } = authSlice.actions;
 export default authSlice.reducer;

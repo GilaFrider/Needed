@@ -11,7 +11,7 @@ namespace Repositiries.Api_Repo
     public interface IFieldOfWorkRepo
     {
         List<FieldOfWork> GetAll();
-
+        FieldOfWork GetByName(string name);
         FieldOfWork Create(FieldOfWork item);
     }
 }

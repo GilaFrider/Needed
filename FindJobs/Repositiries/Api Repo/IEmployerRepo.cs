@@ -9,5 +9,6 @@ namespace Repositiries.Api_Repo
 {
     public interface IEmployerRepo:IRepository<Employer>
     {
+        Employer GetEmployerByEmail(string email);
     }
 }

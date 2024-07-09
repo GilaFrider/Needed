@@ -1,10 +1,10 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import HomePage from '../components/HomePage';
-import AddEmployerForm from '../components/AddEmployerForm';
-import EmployerLoginForm from '../components/EmployerLoginForm';
+import AddEmployerForm from '../components/AddEmployer';
+import EmployerLoginForm from '../components/Login';
 import EmployerDashboard from '../components/EmployerDashboard';
-import ProtectedRoute from '../components/ProtectedRoute';
+//import ProtectedRoute from '../components/ProtectedRoute';
 
 const AppRoutes = () => {
   return (
@@ -13,9 +13,9 @@ const AppRoutes = () => {
       <Route path="/add-employer" element={<AddEmployerForm />} />
       <Route path="/login" element={<EmployerLoginForm />} />
       <Route path="/dashboard" element={
-          <ProtectedRoute>
+          // <ProtectedRoute>
             <EmployerDashboard />
-          </ProtectedRoute>
+          // </ProtectedRoute>
         }
       />
       {/* Add more routes here as needed */}

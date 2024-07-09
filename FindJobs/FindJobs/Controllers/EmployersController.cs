@@ -14,25 +14,22 @@ namespace FindJobs.Controllers
     [ApiController]
     public class EmployersController : ControllerBase
     {
-        IEmployerService blEmployer;
+        IEmployerService employerService;
         public EmployersController(ManagerService manager)
         {
-            blEmployer = manager.employerServices;
+            employerService = manager.employerServices;
         }
         [HttpPost("login")]
         public IActionResult Login([FromBody] Login login)
         {
-            var employer = blEmployer.GetAll()
+            var employer = employerService.GetAll()
                 .FirstOrDefault(e => e.Email == login.Email && e.Password == login.Password);
 
             if (employer == null)
             {
                 return Unauthorized();
             }
-            if (employer == null )
-            {
-                return Unauthorized();
-            }
+            
             // Optional: Generate and return JWT token or any other response
             // var token = GenerateToken(employer.Email);
             // return Ok(new { Token = token });
@@ -42,7 +39,7 @@ namespace FindJobs.Controllers
         [HttpGet]
         public ActionResult<List<EmployerDTO>> GetAll()
         {
-            List<EmployerDTO> get = blEmployer.GetAll();
+            List<EmployerDTO> get = employerService.GetAll();
             //if (get == null)
             //{
             //    return NotFound();
@@ -56,7 +53,7 @@ namespace FindJobs.Controllers
             try
             {
                 // Process job creation logic here (similar to your existing Create method)
-                var createdEmployer = blEmployer.Create(employerDTO);
+                var createdEmployer = employerService.Create(employerDTO);
 
                 return createdEmployer; // Return a success response
             }
@@ -72,7 +69,7 @@ namespace FindJobs.Controllers
         {
             try
             {
-                var updatedEmployer = blEmployer.Update(code, updatedJobDTO);
+                var updatedEmployer = employerService.Update(code, updatedJobDTO);
                 return updatedEmployer;
             }
             catch (Exception ex)
@@ -86,7 +83,7 @@ namespace FindJobs.Controllers
         {
             try
             {
-                var deletedEmployer = blEmployer.Delete(code);
+                var deletedEmployer = employerService.Delete(code);
                 return deletedEmployer;
             }
             catch (Exception ex)

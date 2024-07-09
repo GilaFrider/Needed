@@ -10,29 +10,26 @@ namespace Services.Implementation_Service
     public class FieldOfWorkService : IFieldOfWorkService
     {
         private readonly IFieldOfWorkRepo _fieldOfWorkRepo;
-        //private readonly IMapper _mapper;
         public FieldOfWorkService(ManagerRepo dalManager)
         {
             _fieldOfWorkRepo = dalManager.fieldOfWork;
-            //_mapper = mapper;
+        }
+
+        public FieldOfWorkDTO Create(FieldOfWorkDTO item)
+        {
+            throw new NotImplementedException();
         }
 
         public List<FieldOfWorkDTO> GetAll()
         {
             try
             {
-                // Retrieve FieldOfWork entities from the repository
                 List<FieldOfWork> fieldOfWorks = _fieldOfWorkRepo.GetAll();
 
-                // Map FieldOfWork entities to FieldOfWorkDTO objects
                 List<FieldOfWorkDTO> fieldOfWorkDTOs = fieldOfWorks.Select(fieldOfWork => new FieldOfWorkDTO
                 {
                     Code = fieldOfWork.Code,
                     FieldOfWorkName = fieldOfWork.FieldOfWorkName,
-                    //Jobs = fieldOfWork.Jobs.Select(job => new JobDTO
-                    //{
-                    //    // Map Job properties here
-                    //}).ToList()
                 }).ToList();
 
                 return fieldOfWorkDTOs;
@@ -43,6 +40,11 @@ namespace Services.Implementation_Service
                 throw; // You can rethrow the exception or handle it as needed
             }
 
+        }
+
+        public FieldOfWorkDTO GetByName(string name)
+        {
+            throw new NotImplementedException();
         }
     }
 }

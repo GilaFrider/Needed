@@ -1,32 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchJobs, addJob } from '../redux/thunks/jobThunk';
-//import JobList from './JobList';
-import AddJobForm from './AddJobForm';
+// src/components/ProtectedRoute.js
+import React from 'react';
+import { Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-const EmployerDashboard = () => {
-  const dispatch = useDispatch();
-  const { jobs, loading, error } = useSelector(state => state.jobs);
+const ProtectedRoute = () => {
 
-  useEffect(() => {
-    dispatch(fetchJobs());
-  }, [dispatch]);
+  const { isAuthenticated } = useSelector(state => state.auth);
 
-  const handleAddJob = (jobData) => {
-    dispatch(addJob(jobData));
-  };
-
-  return (
-    <div>
-      <h1>Employer Dashboard</h1>
-      {loading && <p>Loading jobs...</p>}
-      {error && <p>{error}</p>}
-      {/* <JobList jobs={jobs} /> */}
-      <h2>Add New Job</h2>
-      <AddJobForm onAddJob={handleAddJob} />
-    </div>
-  );
+  return isAuthenticated ? <Navigate to="/add-job" /> : <Navigate to="/login" />;
+  
 };
 
-export default EmployerDashboard;
-
+export default ProtectedRoute;
