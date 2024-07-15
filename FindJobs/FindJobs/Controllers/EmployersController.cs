@@ -20,7 +20,7 @@ namespace FindJobs.Controllers
             employerService = manager.employerServices;
         }
         [HttpPost("login")]
-        public IActionResult Login([FromBody] Login login)
+        public ActionResult<EmployerDTO> Login([FromBody] Login login)
         {
             var employer = employerService.GetAll()
                 .FirstOrDefault(e => e.Email == login.Email && e.Password == login.Password);
@@ -34,7 +34,7 @@ namespace FindJobs.Controllers
             // var token = GenerateToken(employer.Email);
             // return Ok(new { Token = token });
 
-            return Ok(new { Message = "Login successful!" });
+            return employer;
         }
         [HttpGet]
         public ActionResult<List<EmployerDTO>> GetAll()

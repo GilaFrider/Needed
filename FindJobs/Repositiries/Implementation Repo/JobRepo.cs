@@ -19,32 +19,42 @@ namespace Repositiries.Implementation_Repo
 
         public Job Create(Job item)
         {
-            try
+            try { 
+
+            Debug.WriteLine("Attempting to add job to context.");
+
+            // Ensure navigation properties are correctly set before adding
+            var employer = context.Employers.Find(item.EmployersCode);
+            var criterion = context.Criteria.Find(item.CriteriaCode);
+            var fieldOfWork = context.FieldOfWorks.Find(item.FieldOfWorkCode);
+
+            if (employer == null || criterion == null || fieldOfWork == null)
             {
-                context.Jobs.Add(item);
-                context.SaveChanges();
-
-                // Include related entities when returning the created job
-                context.Entry(item)
-                       .Reference(j => j.CriteriaCodeNavigation)
-                       .Load();
-
-                context.Entry(item)
-                       .Reference(j => j.EmployersCodeNavigation)
-                       .Load();
-
-                context.Entry(item)
-                       .Reference(j => j.FieldOfWorkCodeNavigation)
-                       .Load();
-
-                return item;
+                throw new Exception("Related entities not found.");
             }
+
+            item.EmployersCodeNavigation = employer;
+            item.CriteriaCodeNavigation = criterion;
+            item.FieldOfWorkCodeNavigation = fieldOfWork;
+
+            context.Jobs.Add(item);
+            context.SaveChanges();
+
+            // Eagerly load related entities
+            context.Entry(item).Reference(j => j.CriteriaCodeNavigation).Load();
+            context.Entry(item).Reference(j => j.EmployersCodeNavigation).Load();
+            context.Entry(item).Reference(j => j.FieldOfWorkCodeNavigation).Load();
+
+            Debug.WriteLine("Job added successfully.");
+            return item;
+        }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.ToString());
+                Debug.WriteLine($"Exception: {ex.ToString()}");
                 throw new Exception("Failed to add a new Job");
             }
         }
+
 
         public Job Delete(int code)
         {
@@ -122,61 +132,7 @@ namespace Repositiries.Implementation_Repo
                 throw new Exception("Failed to update Job");
             }
         }
-        //בעזרת שיטות אלה, כעת תוכל לאחזר רשימה של משרות על סמך השדה שצוין של קוד העבודה או קוד הקריטריונים.
-        //זכור להתאים את הלוגיקה של השיטה ושמות המאפיינים בהתאם ליישום שלך בפועל
-        //public List<Job> GetByEmployer(int employerCode)
-        //{
-        //    try
-        //    {
-        //        return context.Jobs
-        //            .Where(j => j.EmployersCode == employerCode)
-        //            .Include(j => j.CriteriaCodeNavigation)
-        //            .Include(j => j.EmployersCodeNavigation)
-        //            .Include(j => j.FieldOfWorkCodeNavigation)
-        //            .ToList();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Debug.WriteLine(ex.ToString());
-        //        throw new Exception("Failed to get Jobs by Employer");
-        //    }
-        //}
 
-        //public List<Job> GetByFieldOfWork(int fieldOfWorkCode)
-        //{
-        //    try
-        //    {
-        //        return context.Jobs
-        //            .Where(j => j.FieldOfWorkCode == fieldOfWorkCode)
-        //            .Include(j => j.CriteriaCodeNavigation)
-        //            .Include(j => j.EmployersCodeNavigation)
-        //            .Include(j => j.FieldOfWorkCodeNavigation)
-        //            .ToList();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Debug.WriteLine(ex.ToString());
-        //        throw new Exception("Failed to get Jobs by Field of Work");
-        //    }
-        //}
-
-        //public List<Job> GetByCriteria(int criteriaCode)
-        //{
-        //    try
-        //    {
-        //        return context.Jobs
-        //            .Where(j => j.CriteriaCode == criteriaCode)
-        //            .Include(j => j.CriteriaCodeNavigation)
-        //            .Include(j => j.EmployersCodeNavigation)
-        //            .Include(j => j.FieldOfWorkCodeNavigation)
-        //            .ToList();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Debug.WriteLine(ex.ToString());
-        //        throw new Exception("Failed to get Jobs by Criteria");
-        //    }
-        //}
 
        
         }

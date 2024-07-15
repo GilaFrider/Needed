@@ -13,9 +13,9 @@ public partial class Job
 
     public int CriteriaCode { get; set; }
 
-    public virtual Criterion CriteriaCodeNavigation { get; set; } = null!;
+    public virtual Criterion CriteriaCodeNavigation { get; set; }
 
-    public virtual Employer EmployersCodeNavigation { get; set; } = null!;
+    public virtual Employer EmployersCodeNavigation { get; set; }
 
-    public virtual FieldOfWork FieldOfWorkCodeNavigation { get; set; } = null!;
+    public virtual FieldOfWork FieldOfWorkCodeNavigation { get; set; }
 }

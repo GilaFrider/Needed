@@ -1,4 +1,5 @@
 ﻿
+using Repositiries.Models;
 using Services.DTO;
 using System;
 using System.Collections.Generic;
@@ -10,5 +11,11 @@ namespace Services.Api_Service
 {
     public interface IJobService:IRepositoryService<JobDTO>
     {
+        //public EmployerDTO GetEmployerByEmployerCode(int code);
+
+        //public CriterionDTO GetCriterionByCriterionCode(int code);
+
+        //public FieldOfWorkDTO GetFieldOfWorkByFieldOfWorkCode(int code);
+
     }
 }

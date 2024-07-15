@@ -24,7 +24,7 @@ const authSlice = createSlice({
       .addCase(employerLogin.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.isAuthenticated = true;
-        state.user = action.payload;
+        state.user = action.payload; // שומרים את פרטי המעסיק
         state.error = null;
       })
       .addCase(employerLogin.rejected, (state, action) => {

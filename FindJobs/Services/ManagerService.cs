@@ -11,6 +11,8 @@ namespace Services
         public IFieldOfWorkService fieldOfWorkServices { get; }
         public IJobService jobServices { get; }
         public IEmployerService employerServices { get; }
+        public ICriterionService criterionService { get; }
+
         //.....
 
         public ManagerService()
@@ -22,11 +24,13 @@ namespace Services
          
             services.AddScoped<IJobService, JobService>();
             services.AddScoped<IEmployerService, EmployerService>();
+            services.AddScoped<ICriterionService, CriterionService>();
             //.....
             ServiceProvider servicesProvider = services.BuildServiceProvider();
 
             fieldOfWorkServices = (FieldOfWorkService) servicesProvider.GetService<IFieldOfWorkService>();
             employerServices= (EmployerService) servicesProvider.GetRequiredService<IEmployerService>();
+            criterionService =(CriterionService) servicesProvider.GetRequiredService<ICriterionService>();
             jobServices = (JobService)servicesProvider.GetService<IJobService>();
         }
     }

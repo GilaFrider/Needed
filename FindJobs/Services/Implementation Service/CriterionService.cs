@@ -4,13 +4,6 @@ using Repositiries;
 using Repositiries.Api_Repo;
 using Repositiries.Models;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.ConstrainedExecution;
-
 namespace Services.Implementation_Service
 {
     public class CriterionService : ICriterionService

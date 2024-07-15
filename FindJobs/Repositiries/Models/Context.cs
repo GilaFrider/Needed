@@ -25,7 +25,7 @@ public partial class Context : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=D:\\DB\\Data.mdf;Integrated Security=True;Connect Timeout=30");
+        => optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\456\\Desktop\\FindJobFinalProject\\FindJobs\\DB\\Data.mdf;Integrated Security=True;Connect Timeout=30");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -38,7 +38,8 @@ public partial class Context : DbContext
             entity.Property(e => e.Code).HasColumnName("code");
             entity.Property(e => e.Descriptions)
                 .HasMaxLength(1000)
-                .IsUnicode(false);
+                .IsUnicode(false)
+                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
             entity.Property(e => e.NumberOfCvsSent).HasColumnName("NumberOfCVsSent");
             entity.Property(e => e.Salary).HasColumnName("salary");
         });
@@ -49,30 +50,42 @@ public partial class Context : DbContext
 
             entity.Property(e => e.Code).HasColumnName("code");
             entity.Property(e => e.CompanyAddress)
+                .IsRequired()
                 .HasMaxLength(100)
-                .IsUnicode(false);
+                .IsUnicode(false)
+                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
             entity.Property(e => e.CompanyName)
+                .IsRequired()
                 .HasMaxLength(50)
-                .IsUnicode(false);
+                .IsUnicode(false)
+                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
             entity.Property(e => e.Email)
+                .IsRequired()
                 .HasMaxLength(60)
                 .IsUnicode(false)
+                .UseCollation("SQL_Latin1_General_CP1_CI_AS")
                 .HasColumnName("email");
             entity.Property(e => e.Firstname)
                 .HasMaxLength(15)
                 .IsUnicode(false)
+                .UseCollation("SQL_Latin1_General_CP1_CI_AS")
                 .HasColumnName("firstname");
             entity.Property(e => e.Lastname)
                 .HasMaxLength(20)
                 .IsUnicode(false)
+                .UseCollation("SQL_Latin1_General_CP1_CI_AS")
                 .HasColumnName("lastname");
             entity.Property(e => e.Password)
+                .IsRequired()
                 .HasMaxLength(15)
                 .IsUnicode(false)
+                .UseCollation("SQL_Latin1_General_CP1_CI_AS")
                 .HasColumnName("password");
             entity.Property(e => e.Phone)
+                .IsRequired()
                 .HasMaxLength(12)
                 .IsUnicode(false)
+                .UseCollation("SQL_Latin1_General_CP1_CI_AS")
                 .HasColumnName("phone");
         });
 
@@ -84,8 +97,10 @@ public partial class Context : DbContext
 
             entity.Property(e => e.Code).HasColumnName("code");
             entity.Property(e => e.FieldOfWorkName)
+                .IsRequired()
                 .HasMaxLength(15)
                 .IsUnicode(false)
+                .UseCollation("SQL_Latin1_General_CP1_CI_AS")
                 .HasColumnName("fieldOfWorkName");
         });
 

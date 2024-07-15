@@ -3,31 +3,25 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const NavBar = () => {
- // const { isAuthenticated, role } = useSelector(state => state.auth);
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-   
-  };
-
+  // const navigate = useNavigate();
   return (
     <nav style={styles.navBar}>
       <ul style={styles.navList}>
         <li style={styles.navItem}>
           <Link to="/" style={styles.navLink}>Home</Link>
         </li>
-          <li style={styles.navItem}>
-            <Link to="/dashboard" style={styles.navLink}>Add Job</Link>
-          </li>
-        
-            <li style={styles.navItem}>
-              <Link to="/login" style={styles.navLink}>Login</Link>
-            </li>
-      
-          <li style={styles.navItem} onClick={handleLogout}>
+        <li style={styles.navItem}>
+          <Link to="/dashboard" style={styles.navLink}>Add Job</Link>
+        </li>
+
+        <li style={styles.navItem}>
+          <Link to="/login" style={styles.navLink}>Login</Link>
+        </li>
+
+        {/* <li style={styles.navItem} onClick={handleLogout}>
             <Link style={styles.navLink}>Logout</Link>
               
-          </li>
+          </li> */}
       </ul>
     </nav>
   );

@@ -9,5 +9,11 @@ namespace Repositiries.Api_Repo
 {
     public interface IJobRepo:IRepository<Job>
     {
+        //public Employer GetEmployerByEmployerCode(int code);
+
+        //public Criterion GetCriterionByCriterionCode(int code);
+
+        //public FieldOfWork GetFieldOfWorkByFieldOfWorkCode(int code);
+       
     }
 }

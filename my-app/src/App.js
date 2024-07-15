@@ -5,26 +5,17 @@ import NavBar from './components/NavBar';
 import Login from './components/Login';
 import EmployerDashboard from './components/EmployerDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
-import AddEmployer from './components/AddEmployer';
+import AddEmployer from './components/Register';
 import AddJobForm from './components/AddJobForm';
+import AppRoutes from './routes/AppRoutes';
 
 const App = () => {
   return (
-    <Router>
-      <NavBar />
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/add-employer" element={<AddEmployer />} />
-        <Route path="/add-job" element={ <AddJobForm/>} />
-        <Route path="/dashboard" element={<EmployerDashboard />} />
-        {/* <Route path='/protected' element={<ProtectedRoute/>} /> */}
-        <Route path="/" element={<Home />} />
-      </Routes>
-    </Router>
+   <AppRoutes/>
   );
 };
 
-const Home = () => <h1>Home</h1>;
+
 
 export default App;
 

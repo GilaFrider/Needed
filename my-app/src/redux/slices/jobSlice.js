@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchJobs, addJob } from '../thunks/jobThunk';
+import { getJobs, addJob } from '../thunks/jobThunk';
 
 const jobSlice = createSlice({
   name: 'jobs',
@@ -11,14 +11,14 @@ const jobSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchJobs.pending, (state) => {
+      .addCase(getJobs.pending, (state) => {
         state.loading = true;
       })
-      .addCase(fetchJobs.fulfilled, (state, action) => {
+      .addCase(getJobs.fulfilled, (state, action) => {
         state.loading = false;
         state.jobs = action.payload;
       })
-      .addCase(fetchJobs.rejected, (state, action) => {
+      .addCase(getJobs.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })

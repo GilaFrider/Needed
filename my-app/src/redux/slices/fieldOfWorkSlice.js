@@ -1,6 +1,6 @@
 // src/redux/slices/fieldOfWorkSlice.js
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchFieldOfWorks } from '../thunks/jobThunk';
+import { fetchFieldOfWorks } from '../thunks/fieldOfWorkThunk';
 
 const fieldOfWorkSlice = createSlice({
   name: 'fieldOfWorks',

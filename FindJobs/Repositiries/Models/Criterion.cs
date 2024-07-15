@@ -15,7 +15,7 @@ public partial class Criterion
 
     public int? Salary { get; set; }
 
-    public string? Descriptions { get; set; }
+    public string Descriptions { get; set; }
 
     public virtual ICollection<Job> Jobs { get; set; } = new List<Job>();
 }

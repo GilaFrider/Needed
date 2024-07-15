@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addEmployer } from '../redux/thunks/employerThunk';
+import { Link, useNavigate } from 'react-router-dom';
 
-const AddEmployer = () => {
+const Register = () => {
   const dispatch = useDispatch();
   const { status, error } = useSelector((state) => state.employers);
 
@@ -29,17 +30,19 @@ const AddEmployer = () => {
   };
 
   return (
-    <div>
-      <h1>Add Employer</h1>
+    <div className="login-container">
+      <div className="login-box">
+      <h1 className="login-title" >Register</h1>
       {status === 'loading' && <p>Loading...</p>}
       {status === 'failed' && <p>Error: {error}</p>}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="register-form">
         <input
           type="email"
           name="email"
           placeholder="Email"
           value={formData.email}
           onChange={handleChange}
+          className="register-input"
           required
         />
         <input
@@ -48,6 +51,7 @@ const AddEmployer = () => {
           placeholder="password"
           value={formData.password}
           onChange={handleChange}
+          className="register-input"
           required
         />
         <input
@@ -56,6 +60,7 @@ const AddEmployer = () => {
           placeholder="Phone"
           value={formData.phone}
           onChange={handleChange}
+          className="register-input"
           required
         />
         <input
@@ -64,6 +69,7 @@ const AddEmployer = () => {
           placeholder="First Name"
           value={formData.firstname}
           onChange={handleChange}
+          className="register-input"
           required
         />
         <input
@@ -72,6 +78,7 @@ const AddEmployer = () => {
           placeholder="Last Name"
           value={formData.lastname}
           onChange={handleChange}
+          className="register-input"
           required
         />
         <input
@@ -80,6 +87,7 @@ const AddEmployer = () => {
           placeholder="Company Name"
           value={formData.companyName}
           onChange={handleChange}
+          className="register-input"
           required
         />
         <input
@@ -88,12 +96,19 @@ const AddEmployer = () => {
           placeholder="Company Address"
           value={formData.companyAddress}
           onChange={handleChange}
+          className="register-input"
           required
         />
-        <button type="submit">Add Employer</button>
+       <div className="full-width">
+            <button type="submit" className="login-button">Register</button>
+          </div>
       </form>
+      <div className="login-register">
+        Already have an account? <Link to="/login">Login</Link>
+      </div>
+    </div>
     </div>
   );
 };
 
-export default AddEmployer;
+export default Register;

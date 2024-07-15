@@ -13,9 +13,9 @@ public partial class JobDTO
 
     public int CriteriaCode { get; set; }
 
-    public virtual CriterionDTO CriteriaCodeNavigation { get; set; } = null!;
+    public virtual CriterionDTO CriteriaCodeNavigation { get; set; }
 
-    public virtual EmployerDTO EmployersCodeNavigation { get; set; } = null!;
+    public virtual EmployerDTO EmployersCodeNavigation { get; set; }
 
-    public virtual FieldOfWorkDTO FieldOfWorkCodeNavigation { get; set; } = null!;
+    public virtual FieldOfWorkDTO FieldOfWorkCodeNavigation { get; set; }
 }

@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from '../../utils/axios';
+import api from '../../utils/axios';
 
-export const fetchJobs = createAsyncThunk(
+export const getJobs = createAsyncThunk(
   'jobs/fetchJobs',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get('/jobs');
+      const response = await api.get('/jobs');
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -17,21 +17,12 @@ export const addJob = createAsyncThunk(
   'jobs/addJob',
   async (jobData, { rejectWithValue }) => {
     try {
-      const response = await axios.post('/jobs', jobData);
+      console.log("adding");
+      const response = await api.post('/jobs', jobData);
+      console.log(response);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
-    }
-  }
-);
-export const fetchFieldOfWorks = createAsyncThunk(
-  'fieldOfWorks/fetchFieldOfWorks',
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await axios.get('/fieldsOfWork');
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response.data);
     }
   }
 );
