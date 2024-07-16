@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getJobs, addJob } from '../thunks/jobThunk';
+import { getJobs, addJob,deleteJob } from '../thunks/jobThunk';
 
 const jobSlice = createSlice({
   name: 'jobs',
@@ -32,6 +32,9 @@ const jobSlice = createSlice({
       .addCase(addJob.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+      .addCase(deleteJob.fulfilled, (state, action) => {
+        state.jobs = state.jobs.filter(job => job.code !== action.payload);
       });
   },
 });

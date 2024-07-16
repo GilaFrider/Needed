@@ -26,3 +26,7 @@ export const addJob = createAsyncThunk(
     }
   }
 );
+export const deleteJob = createAsyncThunk('jobs/deleteJob', async (jobId) => {
+  await api.delete(`/jobs/${jobId}`);
+  return jobId;
+});
