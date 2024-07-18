@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Services.Implementation_Service;
 
 namespace FindJobs.Controllers
 {
@@ -19,11 +20,11 @@ namespace FindJobs.Controllers
         {
             employerService = manager.employerServices;
         }
-        [HttpPost("login")]
-        public ActionResult<EmployerDTO> Login([FromBody] Login login)
+        [HttpGet("login")]
+        public ActionResult<EmployerDTO> Login(String email,String password)
         {
             var employer = employerService.GetAll()
-                .FirstOrDefault(e => e.Email == login.Email && e.Password == login.Password);
+                .FirstOrDefault(e => e.Email == email && e.Password == password);
 
             if (employer == null)
             {
@@ -40,15 +41,15 @@ namespace FindJobs.Controllers
         public ActionResult<List<EmployerDTO>> GetAll()
         {
             List<EmployerDTO> get = employerService.GetAll();
-            //if (get == null)
-            //{
-            //    return NotFound();
-            //}
+            if (get == null)
+            {
+                return NotFound();
+            }
             return get;
 
         }
         [HttpPost]
-        public ActionResult<EmployerDTO> CreateEmployer([FromBody] EmployerDTO employerDTO)
+        public ActionResult<EmployerDTO> Create([FromBody] EmployerDTO employerDTO)
         {
             try
             {
@@ -65,7 +66,7 @@ namespace FindJobs.Controllers
    
 
         [HttpPut("{code}")]
-        public ActionResult<EmployerDTO> UpdateJob(int code, EmployerDTO updatedJobDTO)
+        public ActionResult<EmployerDTO> Update(int code, EmployerDTO updatedJobDTO)
         {
             try
             {
@@ -79,7 +80,7 @@ namespace FindJobs.Controllers
         }
 
         [HttpDelete("{code}")]
-        public ActionResult<EmployerDTO> DeleteJob(int code)
+        public ActionResult<EmployerDTO> Delete(int code)
         {
             try
             {
@@ -90,6 +91,17 @@ namespace FindJobs.Controllers
             {
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
+        }
+        [HttpGet("{code}")]
+        public ActionResult<EmployerDTO> GetByCode(int code)
+        {
+            var employer = employerService.GetByCode(code);
+            if (employer == null)
+            {
+                return NotFound();
+            }
+
+            return employer;
         }
     }
 

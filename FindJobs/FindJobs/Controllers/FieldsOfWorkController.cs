@@ -19,10 +19,10 @@ namespace FindJobs.Controllers
         public ActionResult<List<FieldOfWorkDTO>> GetAll()
         {
             List<FieldOfWorkDTO> get = blFieldOfWork.GetAll();
-            //if (get == null)
-            //{
-            //    return NotFound();
-            //}
+            if (get == null)
+            {
+                return NotFound();
+            }
             return get;
         }
     }

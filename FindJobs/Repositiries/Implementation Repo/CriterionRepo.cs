@@ -62,7 +62,15 @@ namespace Repositiries.Implementation_Repo
 
         public Criterion GetByCode(int code)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return context.Criteria.FirstOrDefault(x => x.Code == code);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                throw new Exception("Failed to display criterion  Criterion");
+            }
         }
 
         public Criterion Update(int code, Criterion item)

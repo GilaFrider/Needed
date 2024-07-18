@@ -1,11 +1,12 @@
-// src/components/HomePage.js
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getJobs, deleteJob } from '../redux/thunks/jobThunk';
+import { getJobs, deleteJob, updateJob } from '../redux/thunks/jobThunk';
+import UpdateJobForm from '../components/updateJob';
 
 const HomePage = () => {
   const dispatch = useDispatch();
   const { jobs, status, error } = useSelector((state) => state.jobs);
+  const [editingJob, setEditingJob] = useState(null);
 
   useEffect(() => {
     dispatch(getJobs());
@@ -13,6 +14,19 @@ const HomePage = () => {
 
   const handleDelete = (jobId) => {
     dispatch(deleteJob(jobId));
+  };
+
+  const handleEdit = (job) => {
+    setEditingJob(job);
+  };
+
+  const handleCancelEdit = () => {
+    setEditingJob(null);
+  };
+
+  const handleSaveEdit = (jobId, updatedJob) => {
+    dispatch(updateJob({ jobId, updatedJob }));
+    setEditingJob(null);
   };
 
   if (status === 'loading') {
@@ -39,11 +53,20 @@ const HomePage = () => {
                 <p>{job.criteriaCodeNavigation?.salary} : הצעת שכר</p>
                 <a href="#" className="btn btn-primary">לשליחת קורות חיים</a>
                 <button onClick={() => handleDelete(job.code)} className="btn btn-danger">Delete Job</button>
+                <button onClick={() => handleEdit(job)} className="btn btn-warning">Update Job</button>
               </div>
             </div>
           </div>
         ))}
       </div>
+
+      {editingJob && (
+        <UpdateJobForm
+          job={editingJob}
+          onSave={handleSaveEdit}
+          onCancel={handleCancelEdit}
+        />
+      )}
     </div>
   );
 };

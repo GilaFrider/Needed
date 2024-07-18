@@ -41,14 +41,26 @@ namespace Services.Implementation_Service
         public CriterionDTO Create(CriterionDTO criterion)
         {
             Criterion c = new Criterion();
-            c.Code = criterion.Code;
+            //c.Code = criterion.Code;
             c.SeveralYearsOfExperience = criterion.SeveralYearsOfExperience;
             c.Car = criterion.Car;
             c.NumberOfCvsSent = criterion.NumberOfCvsSent;
             c.Salary = criterion.Salary;
             c.Descriptions = criterion.Descriptions;
-            _CriterionRepo.Create(c);
-            return criterion;
+
+            
+            var createdCriterion = _CriterionRepo.Create(c);
+
+            return new CriterionDTO
+            {
+                Code = createdCriterion.Code,
+                SeveralYearsOfExperience = createdCriterion.SeveralYearsOfExperience,
+                Car = createdCriterion.Car,
+                NumberOfCvsSent = createdCriterion.NumberOfCvsSent,
+                Salary = createdCriterion.Salary,
+                Descriptions = createdCriterion.Descriptions
+            };
+            //return criterion;
         }
 
         public CriterionDTO Delete(int code)
@@ -79,7 +91,33 @@ namespace Services.Implementation_Service
 
         public CriterionDTO GetByCode(int code)
         {
-            throw new NotImplementedException();
+            var criterion = _CriterionRepo.GetByCode(code);
+            if (criterion == null)
+            {
+                throw new Exception("Criterion not found");
+            }
+
+            // Map the Criterion entity to CriterionDTO
+            var criterionDto = new CriterionDTO
+            {
+                Code = criterion.Code,
+                SeveralYearsOfExperience = criterion.SeveralYearsOfExperience,
+                Car = criterion.Car,
+                NumberOfCvsSent = criterion.NumberOfCvsSent,
+                Salary = criterion.Salary,
+                Descriptions = criterion.Descriptions,
+                Jobs = criterion.Jobs.Select(job => new JobDTO
+                {
+                    Code = job.Code,
+                    EmployersCode = job.EmployersCode,
+                    FieldOfWorkCode = job.FieldOfWorkCode,
+                    CriteriaCode = job.CriteriaCode,
+                    // Map other properties as needed
+                }).ToList()
+            };
+
+            return criterionDto;
+
         }
         //    Crown c = crowns.Delete(name);
         //        Name = name,

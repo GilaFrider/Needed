@@ -90,10 +90,10 @@ const AddJobForm = () => {
         <label>Car:</label>
         <input type="checkbox" name="car" checked={formData.criteria.car} onChange={handleChange} />
       </div>
-      {/* <div>
+      <div>
         <label>Number of CVs Sent:</label>
         <input type="number" name="numberOfCvsSent" value={formData.criteria.numberOfCvsSent} onChange={handleChange} />
-      </div> */}
+      </div>
       <div>
         <label>Salary:</label>
         <input type="number" name="salary" value={formData.criteria.salary} onChange={handleChange} />

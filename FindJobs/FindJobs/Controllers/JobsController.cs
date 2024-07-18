@@ -18,7 +18,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] JobDTO jobDto)
+        public ActionResult Create([FromBody] JobDTO jobDto)
         {
             if (jobDto == null)
             {
@@ -30,36 +30,36 @@ namespace WebApi.Controllers
         }
 
         [HttpDelete("{code}")]
-        public IActionResult DeleteJob(int code)
+        public ActionResult<JobDTO> DeleteJob(int code)
         {
             var success = _jobService.Delete(code);
             if (success != null)
             {
-                return NoContent();
+                return success;
             }
             return NotFound();
         }
 
         [HttpGet]
-        public IActionResult GetAllJobs()
+        public ActionResult<List<JobDTO>> GetAllJobs()
         {
             var jobs = _jobService.GetAll();
-            return Ok(jobs);
+            return jobs;
         }
 
         [HttpGet("{code}")]
-        public IActionResult GetJobByCode(int code)
+        public ActionResult<JobDTO> GetJobByCode(int code)
         {
             var job = _jobService.GetByCode(code);
             if (job != null)
             {
-                return Ok(job);
+                return job;
             }
             return NotFound();
         }
 
         [HttpPut("{code}")]
-        public IActionResult UpdateJob(int code, [FromBody] JobDTO jobDto)
+        public ActionResult<JobDTO> UpdateJob(int code, [FromBody] JobDTO jobDto)
         {
             if (jobDto == null || jobDto.Code != code)
             {
@@ -69,7 +69,7 @@ namespace WebApi.Controllers
             var updatedJob = _jobService.Update(code, jobDto);
             if (updatedJob != null)
             {
-                return Ok(updatedJob);
+                return updatedJob;
             }
             return NotFound();
         }

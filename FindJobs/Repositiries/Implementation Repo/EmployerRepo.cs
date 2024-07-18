@@ -64,7 +64,15 @@ namespace Repositiries.Implementation_Repo
 
         public Employer GetByCode(int code)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return context.Employers.FirstOrDefault(x => x.Code == code);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                throw new Exception("Failed to display criterion  Criterion");
+            }
         }
 
         public Employer GetEmployerByEmail(string email)

@@ -1,8 +1,8 @@
-// src/components/Login.js
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import { employerLogin } from '../redux/thunks/authThunk';
+
 import './Login.css'; // Import the CSS file
 
 const Login = () => {
@@ -18,10 +18,11 @@ const Login = () => {
   };
 
   useEffect(() => {
-    // if (isAuthenticated) {
+    if (isAuthenticated) {
       navigate('/dashboard');
-    // }
-  }, [navigate]);
+    }
+  }, [isAuthenticated, navigate]);
+
 
   return (
     <div className="login-container">

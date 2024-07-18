@@ -17,14 +17,14 @@ namespace FindJobs.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public ActionResult<List<CriterionDTO>> GetAll()
         {
             var criterions = _criterionService.GetAll();
-            return Ok(criterions);
+            return criterions;
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] CriterionDTO criterion)
+        public ActionResult<CriterionDTO> Create([FromBody] CriterionDTO criterion)
         {
             if (criterion == null)
             {
@@ -32,11 +32,11 @@ namespace FindJobs.Controllers
             }
 
             var createdCriterion = _criterionService.Create(criterion);
-            return CreatedAtAction(nameof(GetByCode), new { code = createdCriterion.Code }, createdCriterion);
+            return createdCriterion;
         }
 
         [HttpDelete("{code}")]
-        public IActionResult Delete(int code)
+        public ActionResult<CriterionDTO> Delete(int code)
         {
             var deletedCriterion = _criterionService.Delete(code);
             if (deletedCriterion == null)
@@ -44,11 +44,11 @@ namespace FindJobs.Controllers
                 return NotFound();
             }
 
-            return Ok(deletedCriterion);
+            return deletedCriterion;
         }
 
         [HttpPut("{code}")]
-        public IActionResult Update(int code, [FromBody] CriterionDTO criterion)
+        public ActionResult<CriterionDTO> Update(int code, [FromBody] CriterionDTO criterion)
         {
             if (criterion == null || criterion.Code != code)
             {
@@ -56,11 +56,11 @@ namespace FindJobs.Controllers
             }
 
             var updatedCriterion = _criterionService.Update(code, criterion);
-            return Ok(updatedCriterion);
+            return updatedCriterion;
         }
 
         [HttpGet("{code}")]
-        public IActionResult GetByCode(int code)
+        public ActionResult<CriterionDTO> GetByCode(int code)
         {
             var criterion = _criterionService.GetByCode(code);
             if (criterion == null)
@@ -68,7 +68,7 @@ namespace FindJobs.Controllers
                 return NotFound();
             }
 
-            return Ok(criterion);
+            return criterion;
         }
     }
 }

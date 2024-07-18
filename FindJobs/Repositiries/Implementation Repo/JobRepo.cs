@@ -63,7 +63,7 @@ namespace Repositiries.Implementation_Repo
                 Job j = context.Jobs.FirstOrDefault(x => x.Code == code);
                 if (j != null)
                 {
-                    context.Jobs.Remove(j);
+                    context.Jobs .Remove(j);
                     context.SaveChanges();
                 }
                 return j;

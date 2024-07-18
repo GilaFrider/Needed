@@ -15,8 +15,7 @@ public class FieldOfWorkService : IFieldOfWorkService
 
     public FieldOfWorkDTO Create(FieldOfWorkDTO item)
     {
-        try
-        {
+        
             var fieldOfWork = new FieldOfWork
             {
                 Code = item.Code,
@@ -26,18 +25,13 @@ public class FieldOfWorkService : IFieldOfWorkService
              // Assuming the code is generated after insertion
 
             return item;
-        }
-        catch (Exception ex)
-        {
-            // Handle any exceptions or add logging here
-            throw; // You can rethrow the exception or handle it as needed
-        }
+       
     }
 
     public List<FieldOfWorkDTO> GetAll()
     {
-        try
-        {
+       
+       
             List<FieldOfWork> fieldOfWorks = _fieldOfWorkRepo.GetAll();
 
             List<FieldOfWorkDTO> fieldOfWorkDTOs = fieldOfWorks.Select(fieldOfWork => new FieldOfWorkDTO
@@ -47,18 +41,12 @@ public class FieldOfWorkService : IFieldOfWorkService
             }).ToList();
 
             return fieldOfWorkDTOs;
-        }
-        catch (Exception ex)
-        {
-            // Handle any exceptions or add logging here
-            throw; // You can rethrow the exception or handle it as needed
-        }
+       
     }
 
     public FieldOfWorkDTO GetByName(string name)
     {
-        try
-        {
+     
             var fieldOfWork = _fieldOfWorkRepo.GetByName(name);
 
             if (fieldOfWork == null)
@@ -71,11 +59,8 @@ public class FieldOfWorkService : IFieldOfWorkService
             };
 
             return fieldOfWorkDTO;
-        }
-        catch (Exception ex)
-        {
-            // Handle any exceptions or add logging here
-            throw; // You can rethrow the exception or handle it as needed
-        }
+        
     }
 }
+
+

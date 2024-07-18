@@ -94,7 +94,22 @@ namespace Services.Implementation_Service
 
         public EmployerDTO GetByCode(int code)
         {
-            throw new NotImplementedException();
+            Employer employer = _EmployerRepo.GetByCode(code);
+            if(employer == null)
+            {
+                throw new Exception("Employer not found");
+            }
+            return new EmployerDTO()
+            {
+                Code = code,
+                Email = employer.Email,
+                Password = employer.Password,
+                Phone = employer.Phone,
+                Firstname = employer.Firstname,
+                Lastname = employer.Lastname,
+                CompanyName = employer.CompanyName,
+                CompanyAddress = employer.CompanyAddress
+            };
         }
 
         public EmployerDTO GetEmployerByEmail(string email)
