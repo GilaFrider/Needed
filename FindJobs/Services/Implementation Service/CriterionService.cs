@@ -8,7 +8,7 @@ namespace Services.Implementation_Service
 {
     public class CriterionService : ICriterionService
     {
-        ICriterionRepo _CriterionRepo;
+        private readonly ICriterionRepo _CriterionRepo;
         public CriterionService(ManagerRepo dalManager)
         {
             _CriterionRepo = dalManager.criterion;
@@ -41,7 +41,6 @@ namespace Services.Implementation_Service
         public CriterionDTO Create(CriterionDTO criterion)
         {
             Criterion c = new Criterion();
-            //c.Code = criterion.Code;
             c.SeveralYearsOfExperience = criterion.SeveralYearsOfExperience;
             c.Car = criterion.Car;
             c.NumberOfCvsSent = criterion.NumberOfCvsSent;
@@ -60,7 +59,6 @@ namespace Services.Implementation_Service
                 Salary = createdCriterion.Salary,
                 Descriptions = createdCriterion.Descriptions
             };
-            //return criterion;
         }
 
         public CriterionDTO Delete(int code)
@@ -96,8 +94,6 @@ namespace Services.Implementation_Service
             {
                 throw new Exception("Criterion not found");
             }
-
-            // Map the Criterion entity to CriterionDTO
             var criterionDto = new CriterionDTO
             {
                 Code = criterion.Code,
@@ -112,21 +108,12 @@ namespace Services.Implementation_Service
                     EmployersCode = job.EmployersCode,
                     FieldOfWorkCode = job.FieldOfWorkCode,
                     CriteriaCode = job.CriteriaCode,
-                    // Map other properties as needed
                 }).ToList()
             };
 
             return criterionDto;
 
         }
-        //    Crown c = crowns.Delete(name);
-        //        Name = name,
-        //        Description = c.Description,
-        //        Price = c.Price,
-        //        ColorId = c.ColorId,
-        //        Qtty = c.Qtty,
-        //        Image = c.Image
-        //    };
     }  
 }
 

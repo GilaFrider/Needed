@@ -15,51 +15,47 @@ public class FieldOfWorkService : IFieldOfWorkService
 
     public FieldOfWorkDTO Create(FieldOfWorkDTO item)
     {
-        
-            var fieldOfWork = new FieldOfWork
-            {
-                Code = item.Code,
-                FieldOfWorkName = item.FieldOfWorkName
-            };
-            _fieldOfWorkRepo.Create(fieldOfWork);
-             // Assuming the code is generated after insertion
 
-            return item;
-       
+        var fieldOfWork = new FieldOfWork
+        {
+            Code = item.Code,
+            FieldOfWorkName = item.FieldOfWorkName
+        };
+        _fieldOfWorkRepo.Create(fieldOfWork);
+        return item;
+
     }
 
     public List<FieldOfWorkDTO> GetAll()
     {
-       
-       
-            List<FieldOfWork> fieldOfWorks = _fieldOfWorkRepo.GetAll();
+        List<FieldOfWork> fieldOfWorks = _fieldOfWorkRepo.GetAll();
 
-            List<FieldOfWorkDTO> fieldOfWorkDTOs = fieldOfWorks.Select(fieldOfWork => new FieldOfWorkDTO
-            {
-                Code = fieldOfWork.Code,
-                FieldOfWorkName = fieldOfWork.FieldOfWorkName,
-            }).ToList();
+        List<FieldOfWorkDTO> fieldOfWorkDTOs = fieldOfWorks.Select(fieldOfWork => new FieldOfWorkDTO
+        {
+            Code = fieldOfWork.Code,
+            FieldOfWorkName = fieldOfWork.FieldOfWorkName,
+        }).ToList();
 
-            return fieldOfWorkDTOs;
-       
+        return fieldOfWorkDTOs;
+
     }
 
     public FieldOfWorkDTO GetByName(string name)
     {
-     
-            var fieldOfWork = _fieldOfWorkRepo.GetByName(name);
 
-            if (fieldOfWork == null)
-                return null;
+        var fieldOfWork = _fieldOfWorkRepo.GetByName(name);
 
-            var fieldOfWorkDTO = new FieldOfWorkDTO
-            {
-                Code = fieldOfWork.Code,
-                FieldOfWorkName = fieldOfWork.FieldOfWorkName,
-            };
+        if (fieldOfWork == null)
+            return null;
 
-            return fieldOfWorkDTO;
-        
+        var fieldOfWorkDTO = new FieldOfWorkDTO
+        {
+            Code = fieldOfWork.Code,
+            FieldOfWorkName = fieldOfWork.FieldOfWorkName,
+        };
+
+        return fieldOfWorkDTO;
+
     }
 }
 

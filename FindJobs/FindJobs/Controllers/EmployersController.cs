@@ -1,13 +1,7 @@
 ﻿using Services;
 using Services.Api_Service;
 using Services.DTO;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using Services.Implementation_Service;
 
 namespace FindJobs.Controllers
 {
@@ -15,7 +9,7 @@ namespace FindJobs.Controllers
     [ApiController]
     public class EmployersController : ControllerBase
     {
-        IEmployerService employerService;
+        private readonly IEmployerService employerService;
         public EmployersController(ManagerService manager)
         {
             employerService = manager.employerServices;
@@ -30,11 +24,6 @@ namespace FindJobs.Controllers
             {
                 return Unauthorized();
             }
-            
-            // Optional: Generate and return JWT token or any other response
-            // var token = GenerateToken(employer.Email);
-            // return Ok(new { Token = token });
-
             return employer;
         }
         [HttpGet]
@@ -53,14 +42,13 @@ namespace FindJobs.Controllers
         {
             try
             {
-                // Process job creation logic here (similar to your existing Create method)
                 var createdEmployer = employerService.Create(employerDTO);
 
-                return createdEmployer; // Return a success response
+                return createdEmployer;
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "An error occurred while creating the job."); // Return an error response
+                return StatusCode(500, "An error occurred while creating the job.");
             }
         }
    

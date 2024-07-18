@@ -1,7 +1,6 @@
 ﻿using Services;
 using Services.Api_Service;
 using Services.DTO;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FindJobs.Controllers
@@ -10,7 +9,7 @@ namespace FindJobs.Controllers
     [ApiController]
     public class FieldsOfWorkController : ControllerBase
     {
-        IFieldOfWorkService blFieldOfWork;
+        private readonly IFieldOfWorkService blFieldOfWork;
         public FieldsOfWorkController(ManagerService manager)
         {
             blFieldOfWork = manager.fieldOfWorkServices;
