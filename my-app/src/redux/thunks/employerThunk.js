@@ -14,4 +14,35 @@ export const addEmployer = createAsyncThunk(
     }
   }
 );
+export const employerLogin = createAsyncThunk(
+  'auth/employerLogin',
+  async ({ email, password }, { rejectWithValue }) => {
+  try {
+    const response = await axios.get(`/employers/login?email=${email}&password=${password}`);
+    const Token = response.data.code;
+    localStorage.setItem('token', Token);
+    alert("Login succeeded");
+    return response.data;
+  } catch (error) {
+    alert("Login Failed");
+    return rejectWithValue(error.response.data);
+  }
+});
+
+
+export const sendCV = createAsyncThunk(
+  'employers/sendCV',
+  async ({ employerId, formData }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(`/employers/send-cv/${employerId}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 

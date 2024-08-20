@@ -1,25 +1,25 @@
 // src/redux/slices/fieldOfWorkSlice.js
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchFieldOfWorks } from '../thunks/fieldOfWorkThunk';
+import { fetchFieldsOfWork } from '../thunks/fieldOfWorkThunk';
 
 const fieldOfWorkSlice = createSlice({
   name: 'fieldOfWorks',
   initialState: {
-    fieldOfWorks: [],
+    fieldsOfWork: [],
     status: 'idle',
     error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchFieldOfWorks.pending, (state) => {
+      .addCase(fetchFieldsOfWork.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(fetchFieldOfWorks.fulfilled, (state, action) => {
+      .addCase(fetchFieldsOfWork.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.fieldOfWorks = action.payload;
       })
-      .addCase(fetchFieldOfWorks.rejected, (state, action) => {
+      .addCase(fetchFieldsOfWork.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload;
       });

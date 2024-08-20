@@ -1,33 +1,52 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import HomePage from '../components/HomePage';
-import Register from '../components/Register';
-import Login from '../components/Login';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from '../pages/HomePage';
 import EmployerDashboard from '../components/EmployerDashboard';
-import AddJobForm from '../components/AddJobForm';
+import JobForm from '../pages/JobForm';
 import NavBar from '../components/NavBar';
+import Login from '../pages/Login';
+import Register from '../pages/Register';
+import SendCVForm from '../pages/SendCVForm';
+// import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+// import '.../node_modules/'
+import '../App.css'
 
 //import ProtectedRoute from '../components/ProtectedRoute';
 
 const AppRoutes = () => {
   return (
-    <BrowserRouter>
-    <NavBar/>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register/>} />
-        <Route path="/login" element={<Login />}/>
-        <Route path='/add-job' element={<AddJobForm />} />
-        <Route path="/dashboard" element={
+    // <BrowserRouter>
+    // <NavBar/>
+    //   <Routes>
+    //     <Route path="/" element={<HomePage />} />
+    //     <Route path="/login" element={<Login />}/>
+    //     <Route path='/add-job' element={<AddJobForm />} />
+    //     <Route path="/dashboard" element={
+    //       // <ProtectedRoute>
+    //       <EmployerDashboard />
+    //       // </ProtectedRoute>
+    //     }
+    //     />
+    //     {/* Add more routes here as needed */}
+    //   </Routes>
+    // </BrowserRouter>
+    <Router>
+      {/* <NavBar/> */}
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path='/add-job' element={<JobForm />} />
+              <Route path="/send-cv/:employerId" element={<SendCVForm />} />
+               <Route path="/dashboard" element={
           // <ProtectedRoute>
           <EmployerDashboard />
-          // </ProtectedRoute>
+          // </ProtectedRoute>a
         }
         />
-        {/* Add more routes here as needed */}
-      </Routes>
-    </BrowserRouter>
+            </Routes>
+     
+    </Router>
   );
 };
 

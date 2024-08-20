@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from '../../utils/axios';
 
-export const fetchFieldOfWorks = createAsyncThunk(
+export const fetchFieldsOfWork = createAsyncThunk(
     'fieldOfWorks/fetchFieldOfWorks',
     async (_, { rejectWithValue }) => {
       try {

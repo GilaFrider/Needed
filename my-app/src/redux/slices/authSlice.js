@@ -1,6 +1,6 @@
 // src/redux/slices/authSlice.js
 import { createSlice } from '@reduxjs/toolkit';
-import { employerLogin } from '../thunks/authThunk';
+import { login, register } from '../thunks/authThunk';
 
 const authSlice = createSlice({
   name: 'auth',
@@ -18,18 +18,29 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(employerLogin.pending, (state) => {
+      .addCase(login.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(employerLogin.fulfilled, (state, action) => {
+      .addCase(login.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.isAuthenticated = true;
         state.user = action.payload; // שומרים את פרטי המעסיק
         state.error = null;
       })
-      .addCase(employerLogin.rejected, (state, action) => {
+      .addCase(login.rejected, (state, action) => {
         state.status = 'failed';
         state.isAuthenticated = false;
+        state.error = action.payload;
+      })
+      .addCase(register.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.employers.push(action.payload);
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.status = 'failed';
         state.error = action.payload;
       });
   },

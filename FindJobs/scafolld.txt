@@ -1,2 +1,0 @@
-
-Scaffold-DbContext 'Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\User\source\repos\DBAccess\DBAccess\Library.mdf;Integrated Security=True;Connect Timeout=30' Microsoft.EntityFrameworkCore.SqlServer –Context LibraryContext -OutputDir Models  -Force
