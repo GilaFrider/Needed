@@ -10,24 +10,25 @@ const Login  = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate(-2);
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(login({ email, password }));
   };
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate('/dashboard');
-    }
-  }, [isAuthenticated, navigate]);
+ 
  
     return (
       <div className="App">
       <div className="auth-wrapper">
         <div className="auth-inner">
       <form onSubmit={handleSubmit}>
-        <h3>Sign In</h3>
+        <h3>Loginn</h3>
         <div className="mb-3">
           <label>Email address</label>
           <input
@@ -53,21 +54,21 @@ const Login  = () => {
               className="custom-control-input"
               id="customCheck1"
             />
-            <label className="custom-control-label" htmlFor="customCheck1">
+            {/* <label className="custom-control-label" htmlFor="customCheck1">
               Remember me
-            </label>
+            </label> */}
           </div>
         </div>
         <div className="d-grid">
           <button type="submit" className="btn btn-primary">
-            Submit
+            Login
           </button>
         </div>
         {/* <p className="forgot-password text-right">
           Forgot <a href="#">password?</a>
         </p> */}
          <p className="forgot-password text-right">
-          Don't registered <a href="/register">login?</a>
+          Don't registered <a href="/register">Register?</a>
         </p>
       </form>
       </div>

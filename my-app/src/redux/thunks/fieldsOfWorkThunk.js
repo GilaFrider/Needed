@@ -6,6 +6,7 @@ export const fetchFieldsOfWork = createAsyncThunk(
     async (_, { rejectWithValue }) => {
       try {
         const response = await axios.get('/fieldsOfWork');
+        
         return response.data;
       } catch (error) {
         return rejectWithValue(error.response.data);

@@ -50,20 +50,25 @@ namespace Needed.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(int id, [FromBody] JobDTO jobDto)
         {
-            if (id != jobDto.Code)
-            {
-                return BadRequest("ID mismatch.");
-            }
 
-            var existingJob = await _jobService.GetByIdAsync(id);
-            if (existingJob == null)
-            {
-                return NotFound();
-            }
+            //try
+            //{
+                var existingJob = await _jobService.GetByIdAsync(id);
+                if (existingJob == null)
+                {
+                    return NotFound();
+                }
 
-            await _jobService.UpdateAsync(jobDto);
-            return NoContent();
+                await _jobService.UpdateAsync(jobDto);
+                return NoContent();
+            //}
+            //catch (Exception ex)
+            //{
+            //    // Log the exception here (e.g., using a logging framework)
+            //    return StatusCode(500, "An error occurred while updating the job. Please try again later.");
+            //}
         }
+
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)

@@ -12,7 +12,7 @@ namespace Services.ImplementationService
     {
         private readonly IJobRepo _jobRepo;
         private readonly IMapper _mapper;
-
+        
         public JobService(IJobRepo jobRepo, IMapper mapper)
         {
             _jobRepo = jobRepo;
@@ -39,8 +39,20 @@ namespace Services.ImplementationService
 
         public async Task UpdateAsync(JobDTO jobDto)
         {
-            var job = _mapper.Map<Job>(jobDto);
-            await _jobRepo.UpdateAsync(job);
+            //var job = _mapper.Map<Job>(jobDto);
+            //await _jobRepo.UpdateAsync(job);
+            var existingJob = await _jobRepo.GetByIdAsync(jobDto.Code);
+
+            if (existingJob == null)
+            {
+                throw new InvalidOperationException("Job not found.");
+            }
+
+            // Map the updated fields from jobDto to the existing job entity
+            _mapper.Map(jobDto, existingJob);
+
+            // Update the existing job entity
+            await _jobRepo.UpdateAsync(existingJob);
         }
 
         public async Task DeleteAsync(int id)

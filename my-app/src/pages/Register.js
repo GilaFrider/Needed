@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../redux/thunks/authThunk';
 import { Link, useNavigate } from 'react-router-dom';
@@ -6,6 +6,13 @@ import './Form.css';
 
 const Register = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isAuthenticated } = useSelector((state) => state.auth);
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate(-3);
+    }
+  }, [isAuthenticated, navigate]);
   const { status, error } = useSelector((state) => state.employers);
 
   const [formData, setFormData] = useState({
@@ -35,7 +42,7 @@ const Register = () => {
       <div className="auth-wrapper">
         <div className="auth-inner">
           <form onSubmit={handleSubmit}>
-            <h3>Sign Up</h3>
+            <h3>Register</h3>
             <div className="mb-3">
               <label>First name</label>
               <input
@@ -120,7 +127,7 @@ const Register = () => {
               </button>
             </div>
             <p className="forgot-password text-right">
-              Already registered <a href="/login">register?</a>
+              Already registered <a href="/login">login?</a>
             </p>
           </form>
         </div>

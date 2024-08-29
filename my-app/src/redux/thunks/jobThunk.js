@@ -30,7 +30,17 @@ export const deleteJob = createAsyncThunk('jobs/deleteJob', async (jobId) => {
   await api.delete(`/jobs/${jobId}`);
   return jobId;
 });
-export const updateJob = createAsyncThunk('jobs/updateJob', async ({ jobId, updatedData }) => {
-  const response = await api.put(`/jobs/${jobId}`, updatedData);
-  return response.data;
-});
+export const updateJob = createAsyncThunk(
+  'jobs/updateJob',
+  async ({ jobId, updatedData }, { rejectWithValue }) => {
+    try {
+      console.log(jobId, updatedData)
+      const response = await api.put(`/jobs/${jobId}`, updatedData, {
+        
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);

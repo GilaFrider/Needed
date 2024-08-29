@@ -1,8 +1,8 @@
 // src/redux/slices/fieldOfWorkSlice.js
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchFieldsOfWork } from '../thunks/fieldOfWorkThunk';
+import { fetchFieldsOfWork } from '../thunks/fieldsOfWorkThunk';
 
-const fieldOfWorkSlice = createSlice({
+const fieldsOfWorkSlice = createSlice({
   name: 'fieldOfWorks',
   initialState: {
     fieldsOfWork: [],
@@ -17,7 +17,7 @@ const fieldOfWorkSlice = createSlice({
       })
       .addCase(fetchFieldsOfWork.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.fieldOfWorks = action.payload;
+        state.fieldsOfWork = action.payload;
       })
       .addCase(fetchFieldsOfWork.rejected, (state, action) => {
         state.status = 'failed';
@@ -26,4 +26,4 @@ const fieldOfWorkSlice = createSlice({
   },
 });
 
-export default fieldOfWorkSlice.reducer;
+export default fieldsOfWorkSlice.reducer;

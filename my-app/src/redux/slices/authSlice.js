@@ -37,7 +37,12 @@ const authSlice = createSlice({
       })
       .addCase(register.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.employers.push(action.payload);
+        // Ensure employers exists in initialState
+        if (Array.isArray(state.employers)) {
+          state.employers.push(action.payload);
+        } else {
+          console.error('State.employers is not an array');
+        }
       })
       .addCase(register.rejected, (state, action) => {
         state.status = 'failed';
