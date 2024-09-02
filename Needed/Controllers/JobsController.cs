@@ -50,9 +50,6 @@ namespace Needed.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(int id, [FromBody] JobDTO jobDto)
         {
-
-            //try
-            //{
                 var existingJob = await _jobService.GetByIdAsync(id);
                 if (existingJob == null)
                 {
@@ -61,12 +58,7 @@ namespace Needed.Controllers
 
                 await _jobService.UpdateAsync(jobDto);
                 return NoContent();
-            //}
-            //catch (Exception ex)
-            //{
-            //    // Log the exception here (e.g., using a logging framework)
-            //    return StatusCode(500, "An error occurred while updating the job. Please try again later.");
-            //}
+           
         }
 
 
